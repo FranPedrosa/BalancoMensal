@@ -1,4 +1,4 @@
-
+/*
 public class Movimentacao {
 	private String Nome;	
 	private int[] diaMes;	
@@ -45,3 +45,4 @@ public class Movimentacao {
 		return categoria;
 	}
 }
+*/

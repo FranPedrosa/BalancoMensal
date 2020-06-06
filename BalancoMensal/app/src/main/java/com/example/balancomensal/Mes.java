@@ -1,14 +1,12 @@
-
+/*
 public class Mes {
-	/*
 	0 Ganhos
-	1 Alimentação
+	1 Alimentaï¿½ï¿½o
 	2 Moradia
 	3 Lazer
 	4 Transporte
 	5 Compras
 	6 OutrosGastos
-	 */
 	private Movimentacao[] listaMov;
 	private double[] valorCategoria;
 	private int numMov;
@@ -42,3 +40,4 @@ public class Mes {
 	}
 	
 }
+*/

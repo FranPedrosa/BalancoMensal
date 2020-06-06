@@ -1,4 +1,4 @@
-
+/*
 public class Fixa {
 	private String Nome;	
 	private int[] diaMes;
@@ -56,3 +56,5 @@ public class Fixa {
 	}
 	
 }
+
+ */
