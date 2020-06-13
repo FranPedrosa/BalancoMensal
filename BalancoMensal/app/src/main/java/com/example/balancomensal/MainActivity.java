@@ -1,9 +1,11 @@
 package com.example.balancomensal;
 
+import androidx.annotation.DrawableRes;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -21,7 +23,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
         setContentView(R.layout.add_data);
     }
     /*
@@ -69,9 +70,8 @@ public class MainActivity extends AppCompatActivity {
         Button btn_rend = findViewById(R.id.btn_rend);
         Spinner s = findViewById(R.id.category);
 
-
-        btn_desp.setBackgroundColor(Color.parseColor("#00FF00"));
-        btn_rend.setBackgroundColor(Color.parseColor("#FFFFFF"));
+        btn_desp.setBackgroundResource(R.drawable.my_button_click);
+        btn_rend.setBackgroundResource(R.drawable.my_button);
         s.setVisibility(View.VISIBLE);
     }
 
@@ -80,8 +80,8 @@ public class MainActivity extends AppCompatActivity {
         Button btn_rend = findViewById(R.id.btn_rend);
         Spinner s = findViewById(R.id.category);
 
-        btn_desp.setBackgroundColor(Color.parseColor("#FFFFFF"));
-        btn_rend.setBackgroundColor(Color.parseColor("#00FF00"));
-        s.setVisibility(View.GONE);
+        btn_desp.setBackgroundResource(R.drawable.my_button);
+        btn_rend.setBackgroundResource(R.drawable.my_button_click);
+        s.setVisibility(View.INVISIBLE);
     }
 }

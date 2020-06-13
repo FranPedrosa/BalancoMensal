@@ -15,11 +15,15 @@
         >
 
         <Button
+
             android:id="@+id/btn_desp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Despesa" />
+            android:onClick="despesa"
+            android:text="Despesa"
+            android:background="@drawable/my_button"
+            />
 
         <Space
             android:layout_width="wrap_content"
@@ -31,7 +35,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Renda" />
+            android:onClick="renda"
+            android:text="Renda"
+            android:background="@drawable/my_button"
+            />
 
     </LinearLayout>
 
