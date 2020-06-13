@@ -22,9 +22,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.teste_pizza);
-        Pizza p = findViewById(R.id.pizza);
-        Mes m = new Mes();
-        p.setMes(m);
+        Grafico g = findViewById(R.id.pizza);
     }
     /*
     public void save(View v) {

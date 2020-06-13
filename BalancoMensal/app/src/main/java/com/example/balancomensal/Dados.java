@@ -55,5 +55,4 @@ public class Dados implements Serializable {
             }
         }
     }
-
 }
