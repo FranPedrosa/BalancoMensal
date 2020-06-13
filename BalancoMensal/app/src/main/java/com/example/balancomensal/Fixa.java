@@ -1,3 +1,4 @@
+package com.example.balancomensal;
 
 public class Fixa {
 	private String Nome;	

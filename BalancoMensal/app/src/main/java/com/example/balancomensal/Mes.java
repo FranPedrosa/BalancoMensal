@@ -1,4 +1,4 @@
-
+package com.example.balancomensal;
 public class Mes {
 	/*
 	0 Ganhos
@@ -20,6 +20,7 @@ public class Mes {
 		for(int i=0;i<7;i++) {
 			valorCategoria[i] = 0.0;
 		}
+		total = 0.0;
 	}
 	
 	public double getTotal() {
@@ -37,11 +38,13 @@ public class Mes {
 		for(int i =0;i<7;i++) {
 			
 			if(m.getCategoria() == i && i != 0) {
-				valorCategoria[i] -= m.getValor();
+				valorCategoria[i] += m.getValor();
+				total -= m.getValor();
 			}
 			
 			if(m.getCategoria() == i && i == 0) {
 				valorCategoria[i] += m.getValor();
+				total += m.getCategoria();
 			}
 		}
 	}
