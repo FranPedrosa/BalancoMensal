@@ -1,14 +1,15 @@
-/*
+
 public class Movimentacao {
 	private String Nome;	
 	private int[] diaMes;	
 	private int valor;
 	private int categoria;
 	
-	Movimentacao(String n,int d, int m, int v, int cat){
+	Movimentacao(String n,int d, int m, int a, int v, int cat){
 		Nome = n;
 		diaMes[0] = d;
-		diaMes[1] = m;		
+		diaMes[1] = m;
+		diaMes[2] = a;
 		valor = v;
 		categoria = cat;
 	}
@@ -45,4 +46,3 @@ public class Movimentacao {
 		return categoria;
 	}
 }
-*/
