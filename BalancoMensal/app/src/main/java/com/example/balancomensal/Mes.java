@@ -2,6 +2,7 @@ package com.example.balancomensal;
 
 public class Mes {
 
+	/*
 	public static final int GANHOS = 0;
 	public static final int ALIMENTACAO = 1;
 	public static final int MORADIA = 2;
@@ -9,6 +10,9 @@ public class Mes {
 	public static final int TRANPORTE = 4;
 	public static final int COMPRAS = 5;
 	public static final int OUTROS = 6;
+	 */
+
+	public static final String[] NOME_CATEGORIAS = {"Ganhos","Alimentação","Moradia","Lazer","Transporte","Compras","Outros"};
 
 	private Movimentacao[] listaMov;
 	private double[] valorCategoria;
@@ -21,6 +25,7 @@ public class Mes {
 		for(int i=0;i<7;i++) {
 			valorCategoria[i] = 0.0;
 		}
+		total = 0.0;
 	}
 	
 	public double getTotal() {
@@ -38,11 +43,13 @@ public class Mes {
 		for(int i =0;i<7;i++) {
 			
 			if(m.getCategoria() == i && i != 0) {
-				valorCategoria[i] -= m.getValor();
+				valorCategoria[i] += m.getValor();
+				total -= m.getValor();
 			}
 			
 			if(m.getCategoria() == i && i == 0) {
 				valorCategoria[i] += m.getValor();
+				total += m.getCategoria();
 			}
 		}
 	}
