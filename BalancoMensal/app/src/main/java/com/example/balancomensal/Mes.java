@@ -1,14 +1,15 @@
+package com.example.balancomensal;
 
 public class Mes {
-	/*
-	0 Ganhos
-	1 Alimentacao
-	2 Moradia
-	3 Lazer
-	4 Transporte
-	5 Compras
-	6 OutrosGastos
-	 */
+
+	public static final int GANHOS = 0;
+	public static final int ALIMENTACAO = 1;
+	public static final int MORADIA = 2;
+	public static final int LAZER = 3;
+	public static final int TRANPORTE = 4;
+	public static final int COMPRAS = 5;
+	public static final int OUTROS = 6;
+
 	private Movimentacao[] listaMov;
 	private double[] valorCategoria;
 	private int numMov;
