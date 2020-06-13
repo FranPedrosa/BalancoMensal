@@ -1,4 +1,5 @@
-/*
+package com.example.balancomensal;
+
 public class Fixa {
 	private String Nome;	
 	private int[] diaMes;
@@ -25,6 +26,10 @@ public class Fixa {
 
 	void setDuracao(int d) {
 		duracao = d;
+	}
+	
+	void reduzDuracao() {
+		duracao--;
 	}
 
 	void setValor(int v) {
@@ -56,5 +61,3 @@ public class Fixa {
 	}
 	
 }
-
- */

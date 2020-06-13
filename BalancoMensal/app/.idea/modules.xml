@@ -3,6 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/../BalancoMensal.iml" filepath="$PROJECT_DIR$/../BalancoMensal.iml" group="BalancoMensal" />
+      <module fileurl="file://$PROJECT_DIR$/BalancoMensal-app.iml" filepath="$PROJECT_DIR$/BalancoMensal-app.iml" group="BalancoMensal/app" />
+      <module fileurl="file://$PROJECT_DIR$/../Hub-BalancoMensal.iml" filepath="$PROJECT_DIR$/../Hub-BalancoMensal.iml" group="BalancoMensal" />
       <module fileurl="file://$PROJECT_DIR$/app.iml" filepath="$PROJECT_DIR$/app.iml" group="BalancoMensal/app" />
     </modules>
   </component>
