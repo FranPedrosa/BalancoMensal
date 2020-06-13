@@ -1,18 +1,18 @@
 package com.example.balancomensal;
 
 import java.io.Serializable;
-
+/*
 public class Dados implements Serializable {
     private Mes listaMes[];
     private Fixa listaFixas[];
     private int tamFixas;
+
     private int numFixas;
 
     Dados(){
         listaMes = new Mes[12];
         listaFixas = new Fixa[20];
         tamFixas = 0;
-    }
 
     // funcao de salvar dados
     //funcao de resgatar dados
@@ -56,3 +56,4 @@ public class Dados implements Serializable {
         }
     }
 }
+*/
