@@ -25,6 +25,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // setContentView(R.layout.teste_pizza);
+        // Grafico g = findViewById(R.id.pizza);
         setContentView(R.layout.add_data);
 
         Spinner spinner = findViewById(R.id.category);
