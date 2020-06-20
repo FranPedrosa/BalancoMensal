@@ -11,6 +11,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,6 +36,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(this);
+
+        despesa(findViewById(R.id.add_data));
+        checkFixa(findViewById(R.id.add_data));
     }
 
     /*
@@ -84,6 +89,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         btn_desp.setBackgroundResource(R.drawable.my_button_click);
         btn_rend.setBackgroundResource(R.drawable.my_button);
         s.setVisibility(View.VISIBLE);
+
+        CheckBox cb = findViewById(R.id.fixa);
+        cb.setText(R.string.desp_fixa);
     }
 
     public void renda(View v) {
@@ -94,6 +102,27 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         btn_desp.setBackgroundResource(R.drawable.my_button);
         btn_rend.setBackgroundResource(R.drawable.my_button_click);
         s.setVisibility(View.INVISIBLE);
+
+        CheckBox cb = findViewById(R.id.fixa);
+        cb.setText(R.string.rend_fixa);
+    }
+
+    public void checkFixa(View v) {
+        CheckBox cb = findViewById(R.id.fixa);
+        if(cb.isChecked())
+            fixa(findViewById(R.id.add_data));
+        else
+            naoFixa(findViewById(R.id.add_data));
+    }
+
+    public void fixa(View v) {
+        EditText edit_txt = findViewById(R.id.duracao);
+        edit_txt.setVisibility(View.VISIBLE);
+    }
+
+    public void naoFixa(View v) {
+        EditText edit_txt = findViewById(R.id.duracao);
+        edit_txt.setVisibility(View.GONE);
     }
 
     @Override

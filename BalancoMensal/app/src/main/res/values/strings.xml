@@ -9,4 +9,7 @@
         <item id="5">Compras</item>
         <item id="6">Outros Gastos</item>
     </string-array>
+
+    <string name = "desp_fixa">Despesa Fixa</string>
+    <string name = "rend_fixa">Renda Fixa</string>
 </resources>
