@@ -27,10 +27,15 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // setContentView(R.layout.teste_pizza);
-        // Grafico g = findViewById(R.id.pizza);
-        setContentView(R.layout.add_data);
 
+        /*
+        setContentView(R.layout.teste_pizza);
+        Grafico g = findViewById(R.id.pizza);
+        double[] teste = {500,-302,25.6,488,-325,-123,10};
+        g.setDados(teste);
+        */
+
+        setContentView(R.layout.add_data);
         Spinner spinner = findViewById(R.id.category);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.category, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
