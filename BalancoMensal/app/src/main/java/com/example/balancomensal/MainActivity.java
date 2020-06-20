@@ -8,6 +8,8 @@ import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -18,17 +20,27 @@ import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        /*
         setContentView(R.layout.teste_pizza);
         Grafico g = findViewById(R.id.pizza);
-        /*
+        double[] teste = {500,-302,25.6,488,-325,-123,10};
+        g.setDados(teste);
+        */
+
         setContentView(R.layout.add_data);
-         */
+        Spinner spinner = findViewById(R.id.category);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.category, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+        spinner.setOnItemSelectedListener(this);
     }
+
     /*
     public void save(View v) {
         TextView tv2 = findViewById(R.id.textView2);
@@ -87,5 +99,15 @@ public class MainActivity extends AppCompatActivity {
         btn_desp.setBackgroundResource(R.drawable.my_button);
         btn_rend.setBackgroundResource(R.drawable.my_button_click);
         s.setVisibility(View.INVISIBLE);
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        String text = parent.getItemAtPosition(position).toString();
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
     }
 }
