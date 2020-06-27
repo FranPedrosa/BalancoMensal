@@ -1,33 +1,18 @@
 package com.example.balancomensal;
 
-import androidx.annotation.DrawableRes;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
-import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.EditText;
-import android.widget.Spinner;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 
 public class MainActivity extends AppCompatActivity {
+
+    Dados db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        //db = Dados.abrir();
         /*
         setContentView(R.layout.teste_pizza);
         Grafico g = findViewById(R.id.pizza);
@@ -35,11 +20,12 @@ public class MainActivity extends AppCompatActivity {
         g.setDados(teste);
         */
         setContentView(R.layout.index);
-        View btn_add = findViewById(R.id.btn_add);
+        View btn_add = findViewById(R.id.btn_save);
+        View btn_rend = findViewById(R.id.btn_rend);
     }
 
     public void adicionar(View v) {
-        setContentView(R.layout.add_data);
+        AddData addData = new AddData(this);
     }
     /*
     public void save(View v) {
@@ -47,6 +33,9 @@ public class MainActivity extends AppCompatActivity {
         Dados db = new Dados();
         db.setTexto((String) tv2.getText());
 
+=======
+    public void salvar(Dados db) {
+>>>>>>> 967d06a24a29e0afdcd483e11101f45826a7c13c
         try{
             FileOutputStream arq;
             //Creating stream and writing the object
@@ -64,7 +53,8 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void open(View v) {
+
+    /*public void abrir{
 
         try{
             //Creating stream to read the object
@@ -78,6 +68,6 @@ public class MainActivity extends AppCompatActivity {
             toast.show();
         }catch(Exception e){System.out.println(e); Toast toast = Toast.makeText(getApplicationContext(), "Sem sucesso" , Toast.LENGTH_SHORT);
             toast.show();}
-    }
-    */
+    }*/
+
 }

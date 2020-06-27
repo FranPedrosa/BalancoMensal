@@ -32,7 +32,6 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@drawable/my_button"
-            android:onClick="renda"
             android:text="Renda" />
 
     </LinearLayout>
@@ -107,7 +106,7 @@
         android:spinnerMode="dropdown" />
 
     <Button
-        android:id="@+id/btn_add"
+        android:id="@+id/btn_save"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="128dp"

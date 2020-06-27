@@ -1,5 +1,13 @@
 package com.example.balancomensal;
 
+import android.content.Context;
+import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
 public class Dados implements Serializable {
@@ -76,6 +84,39 @@ public class Dados implements Serializable {
                 --numFixas;
                 return;
             }
+        }
+    }
+
+    public static Dados abrir(AppCompatActivity app){
+
+        try{
+            //Creating stream to read the object
+            ObjectInputStream in = new ObjectInputStream(app.openFileInput("BMdados"));
+            Dados db = (Dados)in.readObject();
+            //printing the data of the serialized object
+            //closing the stream
+            in.close();
+            return db;
+        }catch(Exception e){
+            return null;
+        }
+    }
+
+    public void salvar(AppCompatActivity app) {
+        try{
+            FileOutputStream arq;
+            //Creating stream and writing the object
+            arq = app.openFileOutput("BMdados", Context.MODE_PRIVATE);
+            ObjectOutputStream out = new ObjectOutputStream(arq);
+            out.writeObject(this);
+            out.flush();
+            //closing the stream
+            out.close();
+            /*Toast toast = Toast.makeText(getApplicationContext(), "Sucesso" , Toast.LENGTH_SHORT);
+            toast.show();*/
+        }catch(Exception e){
+            /*Toast toast = Toast.makeText(getApplicationContext(), "Sem sucesso" , Toast.LENGTH_SHORT);
+            toast.show();*/
         }
     }
 }

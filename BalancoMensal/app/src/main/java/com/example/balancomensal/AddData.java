@@ -1,5 +1,4 @@
 package com.example.balancomensal;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -10,10 +9,32 @@ import android.widget.Spinner;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.balancomensal.R;
-
 public class AddData implements AdapterView.OnItemSelectedListener {
+
     AppCompatActivity app;
+
+    public AddData(AppCompatActivity app) {
+        this.app = app;
+        app.setContentView(R.layout.add_data);
+        Spinner spinner = app.findViewById(R.id.category);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(app, R.array.category, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+        spinner.setOnItemSelectedListener(this);
+
+        View btn_rend = app.findViewById(R.id.btn_rend);
+        View btn_desp = app.findViewById(R.id.btn_desp);
+        View btn_save = app.findViewById(R.id.btn_save);
+        View fixa = app.findViewById(R.id.fixa);
+
+        btn_desp.setOnClickListener(despesa);
+        btn_rend.setOnClickListener(renda);
+        btn_save.setOnClickListener(save);
+        fixa.setOnClickListener(check);
+
+        despesa(btn_desp);
+        check(fixa);
+    }
 
     View.OnClickListener despesa = new View.OnClickListener() {
         @Override
@@ -32,24 +53,16 @@ public class AddData implements AdapterView.OnItemSelectedListener {
     View.OnClickListener check = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            checkFixa(v);
+            check(v);
         }
     };
 
-
-
-    public AddData(AppCompatActivity app) {
-        this.app = app;
-        app.setContentView(R.layout.add_data);
-        Spinner spinner = app.findViewById(R.id.category);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(app, R.array.category, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
-        spinner.setOnItemSelectedListener(this);
-
-        despesa(app.findViewById(R.id.add_data));
-        checkFixa(app.findViewById(R.id.add_data));
-    }
+    View.OnClickListener save = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            save(v);
+        }
+    };
 
     public void despesa(View v) {
         Button btn_desp = app.findViewById(R.id.btn_desp);
@@ -77,7 +90,7 @@ public class AddData implements AdapterView.OnItemSelectedListener {
         cb.setText(R.string.rend_fixa);
     }
 
-    public void checkFixa(View v) {
+    public void check(View v) {
         CheckBox cb = app.findViewById(R.id.fixa);
         if(cb.isChecked())
             fixa(app.findViewById(R.id.add_data));
@@ -102,6 +115,9 @@ public class AddData implements AdapterView.OnItemSelectedListener {
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
+    }
 
+    public void save(View v) {
+        app.setContentView(R.layout.index);
     }
 }
