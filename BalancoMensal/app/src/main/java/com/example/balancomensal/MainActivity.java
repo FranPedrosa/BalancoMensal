@@ -24,10 +24,12 @@ import java.io.ObjectOutputStream;
 
 public class MainActivity extends AppCompatActivity {
 
+    Dados db;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        db = Dados.abrir();
         /*
         setContentView(R.layout.teste_pizza);
         Grafico g = findViewById(R.id.pizza);
@@ -36,12 +38,7 @@ public class MainActivity extends AppCompatActivity {
         */
     }
 
-    /*
-    public void save(View v) {
-        TextView tv2 = findViewById(R.id.textView2);
-        Dados db = new Dados();
-        db.setTexto((String) tv2.getText());
-
+    public void salvar(Dados db) {
         try{
             FileOutputStream arq;
             //Creating stream and writing the object
@@ -59,7 +56,8 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void open(View v) {
+
+    /*public void abrir{
 
         try{
             //Creating stream to read the object
@@ -73,6 +71,6 @@ public class MainActivity extends AppCompatActivity {
             toast.show();
         }catch(Exception e){System.out.println(e); Toast toast = Toast.makeText(getApplicationContext(), "Sem sucesso" , Toast.LENGTH_SHORT);
             toast.show();}
-    }
-    */
+    }*/
+
 }

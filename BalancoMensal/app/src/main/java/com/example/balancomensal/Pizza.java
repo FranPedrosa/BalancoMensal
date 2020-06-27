@@ -36,6 +36,18 @@ public class Pizza extends View{
         }
     }
 
+    public void setDados(Dados dados, int m){
+        val = dados.getMediaCategoriaMeses(m);
+        double total = 0;
+        for(double d : val){
+            total += d;
+        }
+        if(total == 0) total = 1;
+        for(int i = 0; i < val.length;i++){
+            val[i] = val[i]/total;
+        }
+    }
+
     private Paint p;
     private double[] val;
     private final int[] cores= {Color.RED,Color.YELLOW,Color.GREEN,Color.BLUE,Color.CYAN,Color.GRAY};

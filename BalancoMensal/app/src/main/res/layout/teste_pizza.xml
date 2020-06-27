@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.example.balancomensal.Grafico
+    <com.example.balancomensal.Pizza
         android:id="@+id/pizza"
         android:layout_width="1048px"
         android:layout_height="1048px" />
