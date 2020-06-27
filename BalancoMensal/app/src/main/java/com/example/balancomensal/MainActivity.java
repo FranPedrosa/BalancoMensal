@@ -34,8 +34,13 @@ public class MainActivity extends AppCompatActivity {
         double[] teste = {500,-302,25.6,488,-325,-123,10};
         g.setDados(teste);
         */
+        setContentView(R.layout.index);
+        View btn_add = findViewById(R.id.btn_add);
     }
 
+    public void adicionar(View v) {
+        setContentView(R.layout.add_data);
+    }
     /*
     public void save(View v) {
         TextView tv2 = findViewById(R.id.textView2);

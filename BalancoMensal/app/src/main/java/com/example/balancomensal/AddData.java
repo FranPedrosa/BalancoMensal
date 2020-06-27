@@ -36,19 +36,13 @@ public class AddData implements AdapterView.OnItemSelectedListener {
         }
     };
 
-    View.OnClickListener adicionar = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            adicionar(v);
-        }
-    };
 
 
     public AddData(AppCompatActivity app) {
         this.app = app;
         app.setContentView(R.layout.add_data);
         Spinner spinner = app.findViewById(R.id.category);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.category, android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(app, R.array.category, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(this);
@@ -108,10 +102,6 @@ public class AddData implements AdapterView.OnItemSelectedListener {
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
-
-    }
-
-    public void adicionar(View v) {
 
     }
 }
