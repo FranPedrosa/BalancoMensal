@@ -78,7 +78,16 @@ public class Mes {
 		}
 		Movimentacao[]	aux = new Movimentacao[j+1];
 		aux[j] = null;
-		
+
 		return aux;
 	}
+
+	public boolean[] marcadorMes(){
+		boolean[] marcador = new boolean[31];
+		for(int i=0;i<numMov;i++){
+			marcador[listaMov[i].getDiaMes()[0]] = true;
+		}
+		return marcador;
+	}
+
 }
