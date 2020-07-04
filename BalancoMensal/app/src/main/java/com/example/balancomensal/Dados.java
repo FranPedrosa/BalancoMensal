@@ -24,7 +24,8 @@ public class Dados implements Serializable {
         tamFixas = 0;
         numFixas = 0;
     }
-
+    // funcao de salvar dados
+    //funcao de resgatar dados
 
     public void setMesAtual(int mes){mes_atual = mes;}
     public void setAno(int a){ano = a;}

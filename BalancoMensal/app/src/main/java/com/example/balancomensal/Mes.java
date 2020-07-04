@@ -20,7 +20,6 @@ public class Mes {
 	private double total;
 	
 	Mes(){
-		listaMov = new Movimentacao[50];
 		numMov = 0;
 		valorCategoria = new double[7];
 		for(int i=0;i<7;i++) {
@@ -89,5 +88,4 @@ public class Mes {
 		}
 		return marcador;
 	}
-
 }
