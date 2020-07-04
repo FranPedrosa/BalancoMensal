@@ -5,7 +5,8 @@ public class Movimentacao {
 	private int[] diaMes = new int[3];
 	private int valor;
 	private int categoria;
-	
+
+	//oi teste de commit me da meu credito Fran "the não da credito" Pedrosa
 	Movimentacao(String n,int d, int m, int a, int v, int cat){
 		Nome = n;
 		diaMes[0] = d;

@@ -8,6 +8,7 @@
         <item id="4">Transporte</item>
         <item id="5">Compras</item>
         <item id="6">Outros Gastos</item>
+        <item id="-1"></item>
     </string-array>
 
     <string name = "desp_fixa">Despesa Fixa</string>

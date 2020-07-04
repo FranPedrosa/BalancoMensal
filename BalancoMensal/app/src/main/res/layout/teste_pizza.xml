@@ -10,7 +10,8 @@
         android:id="@+id/pizza"
         android:layout_width="1048px"
         android:layout_height="1048px"
-        tools:layout_editor_absoluteX="12dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

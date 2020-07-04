@@ -1,4 +1,5 @@
 package com.example.balancomensal;
+import android.content.Context;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -6,6 +7,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -16,7 +18,7 @@ public class AddData implements AdapterView.OnItemSelectedListener {
     public AddData(AppCompatActivity app) {
         this.app = app;
         app.setContentView(R.layout.add_data);
-        Spinner spinner = app.findViewById(R.id.category);
+        Spinner spinner = app.findViewById(R.id.categoria);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(app, R.array.category, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
@@ -67,7 +69,7 @@ public class AddData implements AdapterView.OnItemSelectedListener {
     public void despesa(View v) {
         Button btn_desp = app.findViewById(R.id.btn_desp);
         Button btn_rend = app.findViewById(R.id.btn_rend);
-        Spinner s = app.findViewById(R.id.category);
+        Spinner s = app.findViewById(R.id.categoria);
 
         btn_desp.setBackgroundResource(R.drawable.my_button_click);
         btn_rend.setBackgroundResource(R.drawable.my_button);
@@ -80,10 +82,11 @@ public class AddData implements AdapterView.OnItemSelectedListener {
     public void renda(View v) {
         Button btn_desp = app.findViewById(R.id.btn_desp);
         Button btn_rend = app.findViewById(R.id.btn_rend);
-        Spinner s = app.findViewById(R.id.category);
+        Spinner s = app.findViewById(R.id.categoria);
 
         btn_desp.setBackgroundResource(R.drawable.my_button);
         btn_rend.setBackgroundResource(R.drawable.my_button_click);
+        s.setSelection(7);
         s.setVisibility(View.INVISIBLE);
 
         CheckBox cb = app.findViewById(R.id.fixa);
@@ -118,6 +121,60 @@ public class AddData implements AdapterView.OnItemSelectedListener {
     }
 
     public void save(View v) {
-        app.setContentView(R.layout.index);
+        View btn_rend = app.findViewById(R.id.btn_rend);
+        View btn_desp = app.findViewById(R.id.btn_desp);
+        EditText nome = app.findViewById(R.id.nome);
+        EditText data = app.findViewById(R.id.data);
+        EditText valor = app.findViewById(R.id.valor);
+        CheckBox fixa = app.findViewById(R.id.fixa);
+        EditText duracao = app.findViewById(R.id.duracao);
+        Spinner categoria = app.findViewById(R.id.categoria);
+
+        if(fixa.isChecked()) {
+            String nom = nome.getText().toString();
+            String dat = data.getText().toString();
+            String dur = duracao.getText().toString();
+            String cat = categoria.getSelectedItem().toString();
+            String val = valor.getText().toString();
+
+            Context context = app.getApplicationContext();
+            int duration = Toast.LENGTH_LONG;
+
+            if(todosPreenchidos(nom, dat, dur, categoria, val, fixa)) {
+                Toast.makeText(context, nom+" "+dat+" "+dur+" "+cat, duration).show();
+                app.setContentView(R.layout.index);
+            }
+            else
+                Toast.makeText(context, "Algum elemento não foi preenchido", duration).show();
+
+        }
+        else {
+            String nom = nome.getText().toString();
+            String dat = data.getText().toString();
+            String dur = duracao.getText().toString();
+            String val = valor.getText().toString();
+            String cat = categoria.getSelectedItem().toString();
+
+            Context context = app.getApplicationContext();
+            int duration = Toast.LENGTH_LONG;
+            Toast.makeText(context, nom+" "+dat+" "+dur+" "+cat, duration).show();
+            if(todosPreenchidos(nom, dat, dur, categoria, val, fixa)) {
+                Toast.makeText(context, nom+" "+dat+" "+dur+" "+cat, duration).show();
+                app.setContentView(R.layout.index);
+            }
+            else
+                Toast.makeText(context, "Algum elemento não foi preenchido", duration).show();
+        }
     }
+
+    private boolean todosPreenchidos(String nome, String data, String duracao, Spinner categoria, String valor, CheckBox fixa) {
+        if(nome == "") return false;
+        else if(data == "") return false;
+        else if(duracao == "" && fixa.isChecked()) return false;
+        else if(categoria.getSelectedItemId() == 0 && categoria.getSelectedItemId() != -1) return false;
+        else if(data == "") return false;
+        else return true;
+    }
+
+
 }

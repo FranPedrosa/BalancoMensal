@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -13,21 +14,31 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //db = Dados.abrir();
-        /*
+/*
         setContentView(R.layout.teste_pizza);
         Grafico g = findViewById(R.id.pizza);
         double[] teste = {500,-302,25.6,488,-325,-123,10};
         g.setDados(teste);
-        */
+*/
         setContentView(R.layout.index);
-        View btn_add = findViewById(R.id.btn_save);
-        View btn_rend = findViewById(R.id.btn_rend);
+
+        View btn_add = findViewById(R.id.btn_add);
     }
 
+    View.OnClickListener adicionar = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            adicionar(v);
+        }
+    };
+
+
     public void adicionar(View v) {
+        Button btn_add = findViewById(R.id.btn_add);
         AddData addData = new AddData(this);
     }
-    /*
+/*
+
     public void save(View v) {
         TextView tv2 = findViewById(R.id.textView2);
         Dados db = new Dados();
