@@ -20,6 +20,7 @@ public class Mes {
 	private double total;
 	
 	Mes(){
+		listaMov = new Movimentacao[50];
 		numMov = 0;
 		valorCategoria = new double[7];
 		for(int i=0;i<7;i++) {
@@ -65,4 +66,28 @@ public class Mes {
 		}
 		return t;
 	}
+
+	public Movimentacao[] findMovData(int dia) {
+		Movimentacao[] lm = new Movimentacao[30];
+		int j=0;
+		for(int i = 0; i < numMov; i++){
+			if(listaMov[i].getDiaMes()[0] == dia) {
+				lm[j] = listaMov[i];
+				j++;
+			}
+		}
+		Movimentacao[]	aux = new Movimentacao[j+1];
+		aux[j] = null;
+
+		return aux;
+	}
+
+	public boolean[] marcadorMes(){
+		boolean[] marcador = new boolean[31];
+		for(int i=0;i<numMov;i++){
+			marcador[listaMov[i].getDiaMes()[0]] = true;
+		}
+		return marcador;
+	}
+
 }
