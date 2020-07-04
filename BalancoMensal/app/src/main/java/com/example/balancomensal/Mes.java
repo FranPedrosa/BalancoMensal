@@ -21,6 +21,7 @@ public class Mes {
 	
 	Mes(){
 		numMov = 0;
+		listaMov = new Movimentacao[50];
 		valorCategoria = new double[7];
 		for(int i=0;i<7;i++) {
 			valorCategoria[i] = 0.0;
@@ -76,6 +77,9 @@ public class Mes {
 			}
 		}
 		Movimentacao[]	aux = new Movimentacao[j+1];
+		for(int i = 0;i < j; i++){
+			aux[i] = lm[i];
+		}
 		aux[j] = null;
 
 		return aux;
