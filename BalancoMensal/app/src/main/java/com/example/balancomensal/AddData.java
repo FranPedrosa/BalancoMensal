@@ -13,16 +13,23 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class AddData implements AdapterView.OnItemSelectedListener {
 
+    boolean desp;
+    String nome;
+    String data;
+    String valor;
+    boolean fixa;
+    String categoria;
+
     AppCompatActivity app;
 
     public AddData(AppCompatActivity app) {
         this.app = app;
         app.setContentView(R.layout.add_data);
-        Spinner spinner = app.findViewById(R.id.categoria);
+
+        Spinner spCategoria = app.findViewById(R.id.categoria);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(app, R.array.category, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
-        spinner.setOnItemSelectedListener(this);
+        spCategoria.setAdapter(adapter);
 
         View btn_rend = app.findViewById(R.id.btn_rend);
         View btn_desp = app.findViewById(R.id.btn_desp);
@@ -69,11 +76,18 @@ public class AddData implements AdapterView.OnItemSelectedListener {
     public void despesa(View v) {
         Button btn_desp = app.findViewById(R.id.btn_desp);
         Button btn_rend = app.findViewById(R.id.btn_rend);
+
         Spinner s = app.findViewById(R.id.categoria);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(app, R.array.category, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        s.setAdapter(adapter);
+        //s.setVisibility(View.VISIBLE);
+
+        desp = true;
 
         btn_desp.setBackgroundResource(R.drawable.my_button_click);
         btn_rend.setBackgroundResource(R.drawable.my_button);
-        s.setVisibility(View.VISIBLE);
+
 
         CheckBox cb = app.findViewById(R.id.fixa);
         cb.setText(R.string.desp_fixa);
@@ -82,12 +96,17 @@ public class AddData implements AdapterView.OnItemSelectedListener {
     public void renda(View v) {
         Button btn_desp = app.findViewById(R.id.btn_desp);
         Button btn_rend = app.findViewById(R.id.btn_rend);
+
         Spinner s = app.findViewById(R.id.categoria);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(app, R.array.nulo, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        s.setAdapter(adapter);
+        //s.setVisibility(View.INVISIBLE);
+
+        desp = false;
 
         btn_desp.setBackgroundResource(R.drawable.my_button);
         btn_rend.setBackgroundResource(R.drawable.my_button_click);
-        s.setSelection(7);
-        s.setVisibility(View.INVISIBLE);
 
         CheckBox cb = app.findViewById(R.id.fixa);
         cb.setText(R.string.rend_fixa);
@@ -102,15 +121,16 @@ public class AddData implements AdapterView.OnItemSelectedListener {
     }
 
     public void fixa(View v) {
+        fixa = true;
         EditText edit_txt = app.findViewById(R.id.duracao);
         edit_txt.setVisibility(View.VISIBLE);
     }
 
     public void naoFixa(View v) {
+        fixa = false;
         EditText edit_txt = app.findViewById(R.id.duracao);
         edit_txt.setVisibility(View.GONE);
     }
-
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         String text = parent.getItemAtPosition(position).toString();
@@ -141,7 +161,7 @@ public class AddData implements AdapterView.OnItemSelectedListener {
             int duration = Toast.LENGTH_LONG;
 
             if(todosPreenchidos(nom, dat, dur, categoria, val, fixa)) {
-                Toast.makeText(context, nom+" "+dat+" "+dur+" "+cat, duration).show();
+                Toast.makeText(context, nom+" "+dat+" "+val+" "+dur+" "+cat, duration).show();
                 app.setContentView(R.layout.index);
             }
             else
@@ -157,7 +177,7 @@ public class AddData implements AdapterView.OnItemSelectedListener {
 
             Context context = app.getApplicationContext();
             int duration = Toast.LENGTH_LONG;
-            Toast.makeText(context, nom+" "+dat+" "+dur+" "+cat, duration).show();
+            Toast.makeText(context, nom+" "+dat+" "+val+" "+dur+" "+cat, duration).show();
             if(todosPreenchidos(nom, dat, dur, categoria, val, fixa)) {
                 Toast.makeText(context, nom+" "+dat+" "+dur+" "+cat, duration).show();
                 app.setContentView(R.layout.index);
@@ -170,11 +190,9 @@ public class AddData implements AdapterView.OnItemSelectedListener {
     private boolean todosPreenchidos(String nome, String data, String duracao, Spinner categoria, String valor, CheckBox fixa) {
         if(nome == "") return false;
         else if(data == "") return false;
+        else if(valor == "") return false;
         else if(duracao == "" && fixa.isChecked()) return false;
-        else if(categoria.getSelectedItemId() == 0 && categoria.getSelectedItemId() != -1) return false;
-        else if(data == "") return false;
+        else if(categoria.getSelectedItemPosition() == 1) return false;
         else return true;
     }
-
-
 }
