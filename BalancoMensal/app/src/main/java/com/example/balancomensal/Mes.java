@@ -92,4 +92,12 @@ public class Mes {
 		}
 		return marcador;
 	}
+
+	public Movimentacao[] proxConta(int dia){
+		boolean[] marc = marcadorMes();
+		while(marc[dia]!= true){
+			dia++;
+		}
+		return findMovData(dia);
+	}
 }
