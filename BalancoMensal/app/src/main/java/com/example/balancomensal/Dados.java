@@ -24,7 +24,8 @@ public class Dados implements Serializable {
         tamFixas = 0;
         numFixas = 0;
     }
-
+    // funcao de salvar dados
+    //funcao de resgatar dados
 
     public void setMesAtual(int mes){mes_atual = mes;}
     public void setAno(int a){ano = a;}
@@ -54,7 +55,7 @@ public class Dados implements Serializable {
         listaMes[mes_atual].addMovimentacao(m);
     }
 
-    public void add(Fixa f, int mes_atual,int ano){
+    public void addFixa(Fixa f){
         if(numFixas < tamFixas){
             for(int i=0;i<tamFixas;i++){
                 if(listaFixas[i] == null) {
@@ -85,6 +86,8 @@ public class Dados implements Serializable {
             }
         }
     }
+
+    public Mes getMes(int n){return listaMes[n];}
 
     public static Dados abrir(AppCompatActivity app){
 
