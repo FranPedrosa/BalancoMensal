@@ -39,6 +39,7 @@ public class Pizza extends View{
                 val[i] = mes.getValorCategoria(i + 1) / total;
             }
         }
+        invalidate();
     }
 
     public void setDados(Dados dados, int m){
@@ -51,11 +52,12 @@ public class Pizza extends View{
         for(int i = 0; i < val.length;i++){
             val[i] = val[i]/total;
         }
+        invalidate();
     }
 
     private Paint p;
     private double[] val;
-    private final int[] cores= {Color.RED,Color.YELLOW,Color.GREEN,Color.BLUE,Color.CYAN,Color.GRAY};
+    private final int[] cores= {Color.RED,Color.YELLOW,Color.GREEN,Color.BLUE,Color.CYAN,Color.GRAY,Color.MAGENTA};
 
     @Override
     protected void onDraw(Canvas canvas){

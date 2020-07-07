@@ -29,6 +29,7 @@ public class Grafico extends View{
                max = Math.abs(d);
            }
         }
+        invalidate();
     }
 
     private Paint p;

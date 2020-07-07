@@ -21,9 +21,12 @@ public class AddData implements AdapterView.OnItemSelectedListener {
     String categoria;
 
     AppCompatActivity app;
+    Dados db;//Novidade
 
-    public AddData(AppCompatActivity app) {
+    public AddData(AppCompatActivity app,Dados db) {
         this.app = app;
+        this.db = db;//Novidade
+
         app.setContentView(R.layout.add_data);
 
         Spinner spCategoria = app.findViewById(R.id.categoria);
@@ -173,14 +176,26 @@ public class AddData implements AdapterView.OnItemSelectedListener {
             String dat = data.getText().toString();
             String dur = duracao.getText().toString();
             String val = valor.getText().toString();
-            String cat = categoria.getSelectedItem().toString();
+            int cat = categoria.getSelectedItemPosition();//Eu mudei essa linha de getSelectedItem para getSel..ItemPosition.
 
             Context context = app.getApplicationContext();
             int duration = Toast.LENGTH_LONG;
             Toast.makeText(context, nom+" "+dat+" "+val+" "+dur+" "+cat, duration).show();
             if(todosPreenchidos(nom, dat, dur, categoria, val, fixa)) {
+                /*==============================================================================
+                Esse código é a gambiarra para pegar os valores.
+                 */
+                int DDMM = Integer.parseInt(dat);
+                int numValor = Integer.parseInt(val);
+                int dia = DDMM / 100;
+                int mes = DDMM % 100;
+                Movimentacao m = new Movimentacao(nom,dia-1,mes-1,2020,numValor,cat);
+                db.add(m);
+                new TelaPrincipal(app,db);
+                /*
+                Fim da gambiarra.
+                ================================================================================*/
                 Toast.makeText(context, nom+" "+dat+" "+dur+" "+cat, duration).show();
-                app.setContentView(R.layout.index);
             }
             else
                 Toast.makeText(context, "Algum elemento não foi preenchido", duration).show();
@@ -192,7 +207,7 @@ public class AddData implements AdapterView.OnItemSelectedListener {
         else if(data == "") return false;
         else if(valor == "") return false;
         else if(duracao == "" && fixa.isChecked()) return false;
-        else if(categoria.getSelectedItemPosition() == 1) return false;
+        else if(categoria.getSelectedItemPosition() == 0) return false;//Mudei de 1 para 0, n sei se ta funcionando.
         else return true;
     }
 }
