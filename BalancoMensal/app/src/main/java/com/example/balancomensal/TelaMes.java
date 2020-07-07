@@ -24,10 +24,11 @@ public class TelaMes{
         ListaMov lm = app.findViewById(R.id.lista);
         Pizza p = app.findViewById(R.id.pizza);
         TextView tw = app.findViewById(R.id.total);
-        tw.setText(dados.getMes(mes).getTotal);
+        tw.setText(dados.getMes(mes).getTotal() + "");
         p.setMes(dados.getMes(mes));
         lm.setMes(dados.getMes(mes));
         c.setMes(dados.getMes(mes),2020,mes);
+        c.setOnTouchListener(toque);
     }
 
     View.OnTouchListener toque = new View.OnTouchListener() {

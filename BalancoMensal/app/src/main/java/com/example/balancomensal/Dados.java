@@ -23,6 +23,9 @@ public class Dados implements Serializable {
         listaFixas = new Fixa[20];
         tamFixas = 0;
         numFixas = 0;
+        for(int i = 0; i < 12;i++){
+            listaMes[i] = new Mes();
+        }
     }
     // funcao de salvar dados
     //funcao de resgatar dados
@@ -52,7 +55,7 @@ public class Dados implements Serializable {
     }
 
     public void add(Movimentacao m){
-        listaMes[mes_atual].addMovimentacao(m);
+        listaMes[m.getDiaMes()[1]].addMovimentacao(m);
     }
 
     public void addFixa(Fixa f){

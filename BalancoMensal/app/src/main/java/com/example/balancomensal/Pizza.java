@@ -22,6 +22,11 @@ public class Pizza extends View{
         p = new Paint();
     }
 
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec){
+        setMeasuredDimension(widthMeasureSpec,widthMeasureSpec);
+    }
+
     public void setMes(Mes mes){
         double total = mes.getTotalGastos();
         if(total == 0){

@@ -81,6 +81,9 @@ public class Calendario extends View{
         //int y = ((i + dia1) / 7)*alt + 3*alt/2;
         int dia = (((y-3*alt/2)/alt)*7 + ((x-larg/2)/larg % 7)) - dia1;
 
+        if(dia < 0 || dia >= meses[numeroDoMes]){
+            dia = -1;
+        }
         return dia;
     }
 }
