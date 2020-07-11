@@ -37,8 +37,9 @@ public class TelaPrincipal {
         View btn_add = app.findViewById(R.id.btn_add);
         btn_add.setOnClickListener(adicionar);
 
-        View btn_meses = app.findViewById(R.id.menu);
-        btn_meses.setOnTouchListener(meses);
+        Meses btn_meses = app.findViewById(R.id.menu);
+        btn_meses.setMes(0,11);
+        btn_meses.setOnTouchListener(fechado);
 
     }
 
@@ -49,16 +50,40 @@ public class TelaPrincipal {
         }
     };
 
-    View.OnTouchListener meses = new View.OnTouchListener() {
+    View.OnTouchListener fechado = new View.OnTouchListener() {
         @Override
         public boolean onTouch(View v, MotionEvent event) {
+
+            Meses menu = (Meses) v;
             int x = (int)event.getX();
             int y = (int)event.getY();
-            int w = v.getWidth();
-            int h = v.getHeight();
-            int i = y/50;
+            if(x > 100 && x < 250 && y > 100 && y < 250){
+                menu.aberto = true;
+                menu.setOnTouchListener(aberto);
+                menu.invalidate();
+            }
+            return false;
+        }
+    };
 
-            new TelaMes(app,i,db);
+    View.OnTouchListener aberto = new View.OnTouchListener() {
+        @Override
+        public boolean onTouch(View v, MotionEvent event) {
+
+            Meses menu = (Meses) v;
+            int x = (int)event.getX();
+            int y = (int)event.getY();
+            int i = y/80;
+
+            if(i < 12 && x < 500){
+                new TelaMes(app,i,db);
+            }
+            else{
+                menu.aberto = false;
+                menu.invalidate();
+                menu.setOnTouchListener(fechado);
+            }
+
             return false;
         }
     };

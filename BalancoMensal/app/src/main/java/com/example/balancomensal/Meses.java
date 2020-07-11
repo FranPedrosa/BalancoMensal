@@ -52,18 +52,22 @@ public class Meses extends View {
     }
 
     private void aberto(Canvas canvas, int w, int h){
-        p.setColor(Color.GREEN);
-        canvas.drawRect(0,0,w,h,p);
         p.setColor(Color.BLACK);
 
         int y = 0;
-        p.setTextSize(40);
+        p.setTextSize(70);
         p.setTextAlign(Paint.Align.LEFT);
 
         for( int i = primeiroMes; i < ultimoMes; i++){
-            canvas.drawText(meses[i],60,i*50 + 40,p);
-            y += 50;
-            i++;
+            if(i % 2 == 0){
+                p.setColor(Color.LTGRAY);
+            }
+            else{
+                p.setColor(Color.GRAY);
+            }
+            canvas.drawRect(0,i*80,500,i*80 + 80,p);
+            p.setColor(Color.BLACK);
+            canvas.drawText(meses[i],60,i*80 + 70,p);
         }
     }
 
@@ -89,4 +93,6 @@ public class Meses extends View {
 
         canvas.drawText("Meses",175,185,p);
     }
+
+    
 }
