@@ -1,14 +1,18 @@
 package com.example.balancomensal;
 
 import android.content.Context;
+import android.os.Build;
 import android.widget.Toast;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.Month;
 
 public class Dados implements Serializable {
     private Mes listaMes[];
@@ -101,6 +105,9 @@ public class Dados implements Serializable {
             //printing the data of the serialized object
             //closing the stream
             in.close();
+
+            db.atualizar();
+
             return db;
         }catch(Exception e){
             return null;
@@ -122,6 +129,33 @@ public class Dados implements Serializable {
         }catch(Exception e){
             /*Toast toast = Toast.makeText(getApplicationContext(), "Sem sucesso" , Toast.LENGTH_SHORT);
             toast.show();*/
+        }
+    }
+
+    private void todasFixas(){
+        for(int i = 0;i < listaFixas.length;i++){
+            fixaParaMovi(listaFixas[i]);
+        }
+    }
+
+    private void atualizar(){
+
+        LocalDate ld = null;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            ld = LocalDate.now();
+            int mes_novo = ld.getMonthValue();
+            int ano_novo = ld.getYear();
+            int mes_diff = mes_novo - mes_atual;
+            mes_diff += (ano_novo - ano) * 12;
+
+            for (int i = 0; i < mes_diff; i++) {
+                mes_atual++;
+                if (mes_atual == 12) {
+                    ano++;
+                    mes_atual = 0;
+                }
+                todasFixas();
+            }
         }
     }
 }
