@@ -33,7 +33,6 @@ public class MainActivity extends AppCompatActivity {
 
 
 /*
-
     public void save(View v) {
         TextView tv2 = findViewById(R.id.textView2);
         Dados db = new Dados();

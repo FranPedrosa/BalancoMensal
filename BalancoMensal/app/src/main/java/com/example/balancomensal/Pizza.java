@@ -88,7 +88,7 @@ public class Pizza extends View{
     public void pizza(Canvas canvas, float x, float y, float w, float h,double[] valores, int[] cores){
         float theta = 0;
         p.setStyle(Paint.Style.FILL);
-        for(int i = 0; i < valores.length;i++){
+        for(int i=0; i<valores.length; i++){
             float fatia = -(float)(360 * valores[i]);
             p.setColor(cores[i]);
             canvas.drawArc(x,y,x+w,y+h,theta,fatia,true,p);

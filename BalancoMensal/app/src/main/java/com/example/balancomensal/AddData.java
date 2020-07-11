@@ -23,17 +23,19 @@ public class AddData implements AdapterView.OnItemSelectedListener {
     AppCompatActivity app;
     Dados db;//Novidade
 
-    public AddData(AppCompatActivity app,Dados db) {
+    public AddData(AppCompatActivity app, Dados db) {
         this.app = app;
-        this.db = db;//Novidade
+        this.db = db; // Novidade
 
-        app.setContentView(R.layout.add_data);
+        app.setContentView(R.layout.add_data); // Muda para a tela para adicionar movimentacoes
 
+        // Inicia o spinner com suas categorias
         Spinner spCategoria = app.findViewById(R.id.categoria);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(app, R.array.category, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spCategoria.setAdapter(adapter);
 
+        // Inicia os botoes e a check box
         View btn_rend = app.findViewById(R.id.btn_rend);
         View btn_desp = app.findViewById(R.id.btn_desp);
         View btn_save = app.findViewById(R.id.btn_save);
@@ -44,10 +46,11 @@ public class AddData implements AdapterView.OnItemSelectedListener {
         btn_save.setOnClickListener(save);
         fixa.setOnClickListener(check);
 
-        despesa(btn_desp);
-        check(fixa);
+        despesa(btn_desp); // Inicia movimentacao como uma despesa
+        check(fixa); // Inicia movimentacao como nao fixa
     }
 
+    // Chamadas de listeners de botoes
     View.OnClickListener despesa = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -77,41 +80,47 @@ public class AddData implements AdapterView.OnItemSelectedListener {
     };
 
     public void despesa(View v) {
-        Button btn_desp = app.findViewById(R.id.btn_desp);
-        Button btn_rend = app.findViewById(R.id.btn_rend);
+        Button btn_desp = app.findViewById(R.id.btn_desp); // Inicia o botao despesa
+        Button btn_rend = app.findViewById(R.id.btn_rend); // Inicia o botao renda
 
+        CheckBox cb = app.findViewById(R.id.fixa); // Inicia a checkbox
+
+        // Inicia o spinner de categorias
         Spinner s = app.findViewById(R.id.categoria);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(app, R.array.category, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         s.setAdapter(adapter);
-        //s.setVisibility(View.VISIBLE);
 
-        desp = true;
+        s.setVisibility(View.VISIBLE); // Mostra o spinner de categorias
 
-        btn_desp.setBackgroundResource(R.drawable.my_button_click);
-        btn_rend.setBackgroundResource(R.drawable.my_button);
+        desp = true; // Coloca o parametro despesa como verdadeiro
+
+        btn_desp.setBackgroundResource(R.drawable.my_button_click); // Escurece o botao despesa
+        btn_rend.setBackgroundResource(R.drawable.my_button); // Volta o botao renda ao normal
 
 
-        CheckBox cb = app.findViewById(R.id.fixa);
-        cb.setText(R.string.desp_fixa);
+        cb.setText(R.string.desp_fixa); // Muda o texto da checkbox
     }
 
     public void renda(View v) {
-        Button btn_desp = app.findViewById(R.id.btn_desp);
-        Button btn_rend = app.findViewById(R.id.btn_rend);
+        Button btn_desp = app.findViewById(R.id.btn_desp); // Inicia o botao despesa
+        Button btn_rend = app.findViewById(R.id.btn_rend); // Inicia o botao renda
 
+        CheckBox cb = app.findViewById(R.id.fixa); // Inicia a checkbox
+
+        // Inicia o spinner de categorias
         Spinner s = app.findViewById(R.id.categoria);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(app, R.array.nulo, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         s.setAdapter(adapter);
-        //s.setVisibility(View.INVISIBLE);
 
-        desp = false;
+        s.setVisibility(View.INVISIBLE); // Mostra o spinner de categorias
 
-        btn_desp.setBackgroundResource(R.drawable.my_button);
-        btn_rend.setBackgroundResource(R.drawable.my_button_click);
+        desp = false; // Coloca o parametro despesa como falso
 
-        CheckBox cb = app.findViewById(R.id.fixa);
+        btn_desp.setBackgroundResource(R.drawable.my_button); // Volta o botao renda ao despesa
+        btn_rend.setBackgroundResource(R.drawable.my_button_click); // Escurece o botao renda
+
         cb.setText(R.string.rend_fixa);
     }
 
@@ -125,14 +134,14 @@ public class AddData implements AdapterView.OnItemSelectedListener {
 
     public void fixa(View v) {
         fixa = true;
-        EditText edit_txt = app.findViewById(R.id.duracao);
-        edit_txt.setVisibility(View.VISIBLE);
+        EditText edit_txt = app.findViewById(R.id.duracao); // Inicia EditText de duracao
+        edit_txt.setVisibility(View.VISIBLE); // Deixa duracao visivel
     }
 
     public void naoFixa(View v) {
         fixa = false;
-        EditText edit_txt = app.findViewById(R.id.duracao);
-        edit_txt.setVisibility(View.GONE);
+        EditText edit_txt = app.findViewById(R.id.duracao); // Inicia EditText de duracao
+        edit_txt.setVisibility(View.GONE); // Deixa duracao invisivel
     }
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -157,7 +166,7 @@ public class AddData implements AdapterView.OnItemSelectedListener {
             String nom = nome.getText().toString();
             String dat = data.getText().toString();
             String dur = duracao.getText().toString();
-            String cat = categoria.getSelectedItem().toString();
+            int cat = categoria.getSelectedItemPosition();
             String val = valor.getText().toString();
 
             Context context = app.getApplicationContext();
@@ -165,10 +174,23 @@ public class AddData implements AdapterView.OnItemSelectedListener {
 
             if(todosPreenchidos(nom, dat, dur, categoria, val, fixa)) {
                 Toast.makeText(context, nom+" "+dat+" "+val+" "+dur+" "+cat, duration).show();
-                app.setContentView(R.layout.index);
+                /*==============================================================================
+                Esse código é a gambiarra para pegar os valores.
+                */
+                int DDMM = Integer.parseInt(dat);
+                int duraca = Integer.parseInt(dur);
+                int numValor = Integer.parseInt(val);
+                int dia = DDMM / 100;
+                int mes = DDMM % 100;
+                Fixa f = new Fixa(nom,dia-1,mes-1, duraca, numValor,cat);
+                db.addFixa(f);
+                new TelaPrincipal(app,db);
+                /*
+                Fim da gambiarra.
+                ================================================================================*/
             }
             else
-                Toast.makeText(context, "Algum elemento não foi preenchido", duration).show();
+                Toast.makeText(context, "Algum elemento não foi preenchido ou o mês está em formato inválido.", duration).show();
 
         }
         else {
@@ -176,15 +198,13 @@ public class AddData implements AdapterView.OnItemSelectedListener {
             String dat = data.getText().toString();
             String dur = duracao.getText().toString();
             String val = valor.getText().toString();
-            int cat = categoria.getSelectedItemPosition();//Eu mudei essa linha de getSelectedItem para getSel..ItemPosition.
+            int cat = categoria.getSelectedItemPosition(); // Eu mudei essa linha de getSelectedItem para getSel..ItemPosition.
 
             Context context = app.getApplicationContext();
             int duration = Toast.LENGTH_LONG;
             Toast.makeText(context, nom+" "+dat+" "+val+" "+dur+" "+cat, duration).show();
             if(todosPreenchidos(nom, dat, dur, categoria, val, fixa)) {
-                /*==============================================================================
-                Esse código é a gambiarra para pegar os valores.
-                 */
+
                 int DDMM = Integer.parseInt(dat);
                 int numValor = Integer.parseInt(val);
                 int dia = DDMM / 100;
@@ -192,22 +212,26 @@ public class AddData implements AdapterView.OnItemSelectedListener {
                 Movimentacao m = new Movimentacao(nom,dia-1,mes-1,2020,numValor,cat);
                 db.add(m);
                 new TelaPrincipal(app,db);
-                /*
-                Fim da gambiarra.
-                ================================================================================*/
+
                 Toast.makeText(context, nom+" "+dat+" "+dur+" "+cat, duration).show();
             }
             else
-                Toast.makeText(context, "Algum elemento não foi preenchido", duration).show();
+                Toast.makeText(context, "Algum elemento não foi preenchido ou o mês está em formato inválido.", duration).show();
         }
     }
 
     private boolean todosPreenchidos(String nome, String data, String duracao, Spinner categoria, String valor, CheckBox fixa) {
+        int DDMM = Integer.parseInt(data);
+        if(DDMM/100 > 31 || DDMM/100 < 1) return false;
+        else if(DDMM%100 > 12 || DDMM%100 < 1) return false;
         if(nome == "") return false;
         else if(data == "") return false;
         else if(valor == "") return false;
         else if(duracao == "" && fixa.isChecked()) return false;
-        else if(categoria.getSelectedItemPosition() == 0) return false;//Mudei de 1 para 0, n sei se ta funcionando.
+        else if(desp && categoria.getSelectedItemPosition() == 0)
+            return false;
+        else if(!desp && categoria.getSelectedItemPosition() == 1)
+            return false;
         else return true;
     }
 }

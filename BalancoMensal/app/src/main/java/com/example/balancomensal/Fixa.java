@@ -2,7 +2,7 @@ package com.example.balancomensal;
 
 public class Fixa {
 	private String Nome;	
-	private int[] diaMes;
+	private int[] diaMes = new int[2];
 	private int duracao;
 	private int valor;
 	private int categoria;
