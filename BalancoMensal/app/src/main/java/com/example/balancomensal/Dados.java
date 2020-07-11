@@ -110,6 +110,8 @@ public class Dados implements Serializable {
 
             return db;
         }catch(Exception e){
+            Toast toast = Toast.makeText(app.getApplicationContext(), "Não encontramos dados antigos." , Toast.LENGTH_SHORT);
+            toast.show();
             return null;
         }
     }
@@ -123,17 +125,13 @@ public class Dados implements Serializable {
             out.writeObject(this);
             out.flush();
             //closing the stream
-            out.close();
-            /*Toast toast = Toast.makeText(getApplicationContext(), "Sucesso" , Toast.LENGTH_SHORT);
-            toast.show();*/
         }catch(Exception e){
-            /*Toast toast = Toast.makeText(getApplicationContext(), "Sem sucesso" , Toast.LENGTH_SHORT);
-            toast.show();*/
+
         }
     }
 
     private void todasFixas(){
-        for(int i = 0;i < listaFixas.length;i++){
+        for(int i = 0;i < numFixas;i++){
             fixaParaMovi(listaFixas[i]);
         }
     }
