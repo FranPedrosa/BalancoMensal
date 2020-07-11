@@ -1,5 +1,6 @@
 package com.example.balancomensal;
 
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -36,12 +37,29 @@ public class TelaPrincipal {
         View btn_add = app.findViewById(R.id.btn_add);
         btn_add.setOnClickListener(adicionar);
 
+        View btn_meses = app.findViewById(R.id.menu);
+        btn_meses.setOnTouchListener(meses);
+
     }
 
     View.OnClickListener adicionar = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             adicionar(v);
+        }
+    };
+
+    View.OnTouchListener meses = new View.OnTouchListener() {
+        @Override
+        public boolean onTouch(View v, MotionEvent event) {
+            int x = (int)event.getX();
+            int y = (int)event.getY();
+            int w = v.getWidth();
+            int h = v.getHeight();
+            int i = y/50;
+
+            new TelaMes(app,i,db);
+            return false;
         }
     };
 
