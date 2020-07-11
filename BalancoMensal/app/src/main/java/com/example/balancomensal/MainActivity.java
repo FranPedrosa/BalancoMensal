@@ -17,9 +17,14 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //db = Dados.abrir();
+        db = Dados.abrir(this);
 
-        db = new Dados();
+        if(db == null){
+            db = new Dados();
+            System.out.println("Dados não encontrados criando novos.");
+            //Deveria avisar o cliente que não achou o histórico de transações?
+        }
+
         new TelaPrincipal(this,db);
 
         /* ==================================================================
