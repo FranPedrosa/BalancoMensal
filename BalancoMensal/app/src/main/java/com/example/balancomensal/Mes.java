@@ -1,6 +1,8 @@
 package com.example.balancomensal;
 
-public class Mes {
+import java.io.Serializable;
+
+public class Mes implements Serializable {
 
 	/*
 	public static final int GANHOS = 0;
