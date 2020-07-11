@@ -1,6 +1,8 @@
 package com.example.balancomensal;
 
-public class Fixa {
+import java.io.Serializable;
+
+public class Fixa implements Serializable {
 	private String Nome;	
 	private int[] diaMes = new int[2];
 	private int duracao;
