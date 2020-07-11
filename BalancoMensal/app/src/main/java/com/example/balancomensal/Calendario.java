@@ -78,7 +78,7 @@ public class Calendario extends View{
         int larg = w/8;
         int alt = h/7;
 
-        //int y = ((i + dia1) / 7)*alt + 3*alt/2;
+        System.out.println("ihw r rNQII " + alt + " AEGIO EIONGIE " + h);
         int dia = (((y-3*alt/2)/alt)*7 + ((x-larg/2)/larg % 7)) - dia1;
 
         if(dia < 0 || dia >= meses[numeroDoMes]){

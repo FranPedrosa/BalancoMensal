@@ -16,9 +16,11 @@ import androidx.appcompat.app.AppCompatActivity;
 public class TelaMes{
 
     AppCompatActivity app;
+    Dados db;
 
     public TelaMes(AppCompatActivity app, int mes, Dados dados) {
         this.app = app;
+        this.db = dados;
         app.setContentView(R.layout.tela_mes);
         Calendario c = app.findViewById(R.id.calendario);
         ListaMov lm = app.findViewById(R.id.lista);
@@ -29,6 +31,10 @@ public class TelaMes{
         lm.setMes(dados.getMes(mes));
         c.setMes(dados.getMes(mes),2020,mes);
         c.setOnTouchListener(toque);
+
+        Meses menu = app.findViewById(R.id.menu2);
+        menu.setMes(0,11);
+        menu.setOnTouchListener(fechado);
     }
 
     View.OnTouchListener toque = new View.OnTouchListener() {
@@ -38,6 +44,45 @@ public class TelaMes{
             ListaMov lm = app.findViewById(R.id.lista);
             int dia = c.getDia((int)event.getX(),(int)event.getY());
             lm.setDia(dia);
+            return false;
+        }
+    };
+
+    View.OnTouchListener fechado = new View.OnTouchListener() {
+        @Override
+        public boolean onTouch(View v, MotionEvent event) {
+
+            Meses menu = (Meses) v;
+            int x = (int)event.getX();
+            int y = (int)event.getY();
+            if(x > 100 && x < 250 && y > 100 && y < 250){
+                menu.aberto = true;
+                menu.setOnTouchListener(aberto);
+                menu.invalidate();
+            }
+            return false;
+        }
+    };
+
+    View.OnTouchListener aberto = new View.OnTouchListener() {
+        @Override
+        public boolean onTouch(View v, MotionEvent event) {
+
+            Meses menu = (Meses) v;
+            int x = (int)event.getX();
+            int y = (int)event.getY();
+            int i = y/80;
+
+            if(i < 12 && x < 500){
+                new TelaMes(app,i,db);
+                return true;
+            }
+            else{
+                menu.aberto = false;
+                menu.invalidate();
+                menu.setOnTouchListener(fechado);
+            }
+
             return false;
         }
     };
