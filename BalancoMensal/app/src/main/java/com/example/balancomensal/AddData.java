@@ -173,7 +173,6 @@ public class AddData implements AdapterView.OnItemSelectedListener {
             int duration = Toast.LENGTH_LONG;
 
             if(todosPreenchidos(nom, dat, dur, categoria, val, fixa)) {
-                Toast.makeText(context, nom+" "+dat+" "+val+" "+dur+" "+cat, duration).show();
                 /*==============================================================================
                 Esse código é a gambiarra para pegar os valores.
                 */
@@ -191,7 +190,6 @@ public class AddData implements AdapterView.OnItemSelectedListener {
             }
             else
                 Toast.makeText(context, "Algum elemento não foi preenchido ou o mês está em formato inválido.", duration).show();
-
         }
         else {
             String nom = nome.getText().toString();
@@ -212,8 +210,6 @@ public class AddData implements AdapterView.OnItemSelectedListener {
                 Movimentacao m = new Movimentacao(nom,dia-1,mes-1,2020,numValor,cat);
                 db.add(m);
                 new TelaPrincipal(app,db);
-
-                Toast.makeText(context, nom+" "+dat+" "+dur+" "+cat, duration).show();
             }
             else
                 Toast.makeText(context, "Algum elemento não foi preenchido ou o mês está em formato inválido.", duration).show();
@@ -221,13 +217,17 @@ public class AddData implements AdapterView.OnItemSelectedListener {
     }
 
     private boolean todosPreenchidos(String nome, String data, String duracao, Spinner categoria, String valor, CheckBox fixa) {
+        if(data.equals("")) {
+            System.out.println("a string é: '" + data + "'");
+            return false;
+        }
         int DDMM = Integer.parseInt(data);
         if(DDMM/100 > 31 || DDMM/100 < 1) return false;
         else if(DDMM%100 > 12 || DDMM%100 < 1) return false;
-        if(nome == "") return false;
-        else if(data == "") return false;
-        else if(valor == "") return false;
-        else if(duracao == "" && fixa.isChecked()) return false;
+        if(nome.equals("")) return false;
+        else if(data.equals("")) return false;
+        else if(valor.equals("")) return false;
+        else if(duracao.equals("") && fixa.isChecked()) return false;
         else if(desp && categoria.getSelectedItemPosition() == 0)
             return false;
         else if(!desp && categoria.getSelectedItemPosition() == 1)
