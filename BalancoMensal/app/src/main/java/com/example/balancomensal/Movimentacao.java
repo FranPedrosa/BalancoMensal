@@ -1,6 +1,8 @@
 package com.example.balancomensal;
 
-public class Movimentacao {
+import java.io.Serializable;
+
+public class Movimentacao implements Serializable {
 	private String Nome;	
 	private int[] diaMes = new int[3];
 	private int valor;
