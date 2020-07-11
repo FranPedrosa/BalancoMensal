@@ -95,5 +95,4 @@ public class Pizza extends View{
             theta+=fatia;
         }
     }
-
 }
