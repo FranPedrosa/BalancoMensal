@@ -19,6 +19,8 @@ public class TelaPrincipal {
         this.app = app;
         this.db = d;
 
+        db.salvar(app);
+        System.out.println("Salvando...............");
         app.setContentView(R.layout.index);
 
         Grafico g = app.findViewById(R.id.grafico);
