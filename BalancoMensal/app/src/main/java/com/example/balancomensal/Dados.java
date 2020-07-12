@@ -22,14 +22,18 @@ public class Dados implements Serializable {
     private int numFixas;
     private int ano;
 
-    Dados() {
+    transient static AppCompatActivity app;
+
+    Dados(int mes, int ano) {
         listaMes = new Mes[12];
         listaFixas = new Fixa[20];
         tamFixas = 0;
-        numFixas = 0;
+        numFixas = 20;
         for(int i = 0; i < 12;i++){
             listaMes[i] = new Mes();
         }
+        this.mes_atual = mes;
+        this.ano = ano;
     }
     // funcao de salvar dados
     //funcao de resgatar dados
@@ -106,10 +110,14 @@ public class Dados implements Serializable {
             //closing the stream
             in.close();
 
+            Dados.app = app;
             db.atualizar();
 
             return db;
         }catch(Exception e){
+            System.out.println("========================================");
+            e.printStackTrace();
+            System.out.println("========================================");
             Toast toast = Toast.makeText(app.getApplicationContext(), "Não encontramos dados antigos." , Toast.LENGTH_SHORT);
             toast.show();
             return null;
@@ -131,7 +139,7 @@ public class Dados implements Serializable {
     }
 
     private void todasFixas(){
-        for(int i = 0;i < numFixas;i++){
+        for(int i = 0;i < tamFixas;i++){
             fixaParaMovi(listaFixas[i]);
         }
     }
@@ -155,5 +163,6 @@ public class Dados implements Serializable {
                 todasFixas();
             }
         }
+
     }
 }
