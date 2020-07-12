@@ -1,7 +1,9 @@
 package com.example.balancomensal;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -9,10 +11,13 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 
+import java.time.LocalDate;
+
 public class MainActivity extends AppCompatActivity {
 
     Dados db;
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,7 +25,8 @@ public class MainActivity extends AppCompatActivity {
         db = Dados.abrir(this);
 
         if(db == null){
-            db = new Dados();
+            LocalDate ld = LocalDate.now();
+            db = new Dados(ld.getMonthValue(),ld.getYear());
             System.out.println("Dados não encontrados criando novos.");
             //Deveria avisar o cliente que não achou o histórico de transações?
         }
