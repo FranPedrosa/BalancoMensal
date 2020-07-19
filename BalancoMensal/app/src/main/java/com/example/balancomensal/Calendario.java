@@ -4,15 +4,20 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.os.Build;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
+
+import androidx.annotation.RequiresApi;
+
+import java.time.LocalDate;
 
 public class Calendario extends View{
 
     private Mes mes;
     int numeroDoMes = 3;
-    private int dia1 = 2;
+    private int dia1;
     private Paint p;
     private String[] nomeDosMeses = {"Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"};
     private int[] meses = {31,28,31,30,31,30,31,31,30,31,30,31};
@@ -27,7 +32,12 @@ public class Calendario extends View{
         p = new Paint();
     }
 
-    public void setMes(Mes mes,int ano, int numeroDoMes){
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public void setMes(Mes mes, int ano, int numeroDoMes){
+
+        LocalDate ld = LocalDate.now();
+
+        this.dia1 = ld.getDayOfWeek().getValue();
         this.mes = mes;
         this.numeroDoMes = numeroDoMes;
         if(ano % 400 == 0 || (ano % 4 == 0 && ano % 100 != 0)){

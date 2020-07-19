@@ -91,9 +91,6 @@ public class TelaMes{
 
     View.OnClickListener voltar = new View.OnClickListener() {
         public void onClick(View v) {
-            Context context = app.getApplicationContext();
-            int duration = Toast.LENGTH_LONG;
-            Toast.makeText(context, "Click Click", duration).show();
             new TelaPrincipal(app,db);
         }
     };
