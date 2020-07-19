@@ -22,8 +22,9 @@ public class Grafico extends View{
         p = new Paint();
     }
 
-    public void setDados(double[] dados){
+    public void setDados(double[] dados,int mesAtual){
         meses = dados;
+        this.mesAtual = mesAtual;
         for (double d : dados) {
            if(Math.abs(d) > max){
                max = Math.abs(d);
@@ -33,10 +34,10 @@ public class Grafico extends View{
     }
 
     private Paint p;
-    private double[] meses = {0.2,5.0,-0.3,3.2,0.2,5.0,-0.3,3.2,0.2,5.0,-0.3,3.2,0.2,5.0,-0.3,3.2};
-
+    private double[] meses;
+    private String[] nomes = {"JAN","FEB","MAR","ABR","MAI","JUN","JUL","AGO","SET","OUT","NOV","DEZ"};
+    private int mesAtual;
     private double max = 5;
-     //private final int[] cores= {Color.RED,Color.YELLOW,Color.GREEN,Color.BLUE,Color.CYAN,Color.GRAY};
 
     @Override
     protected void onDraw(Canvas canvas){
@@ -56,32 +57,21 @@ public class Grafico extends View{
         canvas.drawLine(0,h/2,w,h/2,p);
         p.setTextSize(30);
 
-        for(int i = 0; i < meses.length;i++){
+        for(int i = meses.length-1; i >= 0 ;i--){
             String valor = String.format("%.2f",meses[i]);
             if(meses[i] < 0){
+                p.setColor(Color.BLACK);
+                canvas.drawText(nomes[mesAtual],larg*(i+0.1f),(float)(h/2 - meses[i]*zoom)-35,p);
                 p.setColor(Color.RED);
                 canvas.drawText(valor,larg*(i+0.1f),(float)(h/2 - meses[i]*zoom)+35,p);
             }
             else{
+                p.setColor(Color.BLACK);
+                canvas.drawText(nomes[mesAtual],larg*(i+0.1f),(float)(h/2 - meses[i]*zoom)+35,p);
                 p.setColor(Color.GREEN);
                 canvas.drawText(valor,larg*(i+0.1f),(float)(h/2 - meses[i]*zoom)-5,p);
             }
-
             canvas.drawRect(larg*(i+0.1f),h/2,larg*(i+0.8f),(float)(h/2 - meses[i]*zoom),p);
-            //canvas.drawText(meses[i] + "",larg*(i+0.1f),(float)(h/2 - meses[i]*zoom),p);
         }
-
-        /*float left = (float)(w*0.75);
-        float lefttext = (float)(w*0.81);
-        float right = (float)(w*0.79);
-        p.setTextSize(30);
-        for(int i = 0; i < 6; i++){
-            float top = (float)(h*(0.70+i*0.05));
-            float toptext = (float)(h*(0.73+i*0.05));
-            float bottom = (float)(h*(0.74+i*0.05));
-            p.setColor(cores[i]);
-            canvas.drawRect(left,top,right,bottom,p);
-            canvas.drawText(Mes.NOME_CATEGORIAS[i+1],lefttext,toptext,p);
-        }*/
     }
 }

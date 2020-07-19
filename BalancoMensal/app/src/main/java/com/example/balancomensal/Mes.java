@@ -43,18 +43,17 @@ public class Mes implements Serializable {
 	}
 	
 	public void addValorCategoria(Movimentacao m) {
-		for(int i =0;i<7;i++) {
-			
-			if(m.getCategoria() == i && i != 0) {
-				valorCategoria[i] += m.getValor();
+
+			if(m.getCategoria() != 0) {
+				valorCategoria[m.getCategoria()] += m.getValor();
 				total -= m.getValor();
 			}
 			
-			if(m.getCategoria() == i && i == 0) {
-				valorCategoria[i] += m.getValor();
-				total += m.getCategoria();
+			if(m.getCategoria() == 0) {
+				valorCategoria[m.getCategoria()] += m.getValor();
+				total += m.getValor();
 			}
-		}
+
 	}
 	
 	public double getValorCategoria(int cat) {
