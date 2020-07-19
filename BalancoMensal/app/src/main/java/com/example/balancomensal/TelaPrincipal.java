@@ -79,11 +79,9 @@ public class TelaPrincipal {
             int x = (int)event.getX();
             int y = (int)event.getY();
             int i = menu.getMes(y);
-            int ano = db.getAno();
-            if(i > db.getMesAtual()) ano = db.getAno() -1;
 
             if(i < 12 && x < 600){
-                new TelaMes(app,i,ano,db);
+                new TelaMes(app,i,db);
             }
             else{
                 menu.aberto = false;
