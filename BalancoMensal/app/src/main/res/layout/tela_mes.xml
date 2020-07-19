@@ -4,8 +4,8 @@
     android:layout_height="wrap_content"
     android:layout_width="match_parent">
 
-    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/scroll"
+    <ScrollView
+        android:id="@+id/scroll"
     android:layout_height="wrap_content"
     android:layout_width="match_parent">
 
@@ -41,9 +41,9 @@
         android:layout_height="249dp" />
 
         <com.example.balancomensal.ListaMov
-        android:id="@+id/lista"
-        android:layout_width="match_parent"
-        android:layout_height="100dp" />
+            android:id="@+id/lista"
+            android:layout_width="164dp"
+            android:layout_height="122dp" />
 
         <TextView
             android:id="@+id/textView5"
@@ -60,6 +60,13 @@
         android:layout_width="match_parent"
         android:layout_height="246dp" />
 
+        <Button
+            android:id="@+id/return_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/my_button"
+            android:text="Voltar" />
+
     </LinearLayout>
 </ScrollView>
 
@@ -67,4 +74,5 @@
         android:id="@+id/menu2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
+
 </RelativeLayout>

@@ -35,6 +35,8 @@ public class TelaMes{
         Meses menu = app.findViewById(R.id.menu2);
         menu.setMes(0,11);
         menu.setOnTouchListener(fechado);
+        Button retornar = app.findViewById(R.id.return_btn);
+        retornar.setOnClickListener(voltar);
     }
 
     View.OnTouchListener toque = new View.OnTouchListener() {
@@ -84,6 +86,15 @@ public class TelaMes{
             }
 
             return false;
+        }
+    };
+
+    View.OnClickListener voltar = new View.OnClickListener() {
+        public void onClick(View v) {
+            Context context = app.getApplicationContext();
+            int duration = Toast.LENGTH_LONG;
+            Toast.makeText(context, "Click Click", duration).show();
+            new TelaPrincipal(app,db);
         }
     };
 }
