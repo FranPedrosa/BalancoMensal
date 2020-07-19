@@ -23,6 +23,7 @@ public class AddData implements AdapterView.OnItemSelectedListener {
     AppCompatActivity app;
     Dados db;//Novidade
 
+
     public AddData(AppCompatActivity app, Dados db) {
         this.app = app;
         this.db = db; // Novidade
@@ -48,6 +49,38 @@ public class AddData implements AdapterView.OnItemSelectedListener {
 
         despesa(btn_desp); // Inicia movimentacao como uma despesa
         check(fixa); // Inicia movimentacao como nao fixa
+    }
+
+    public AddData(Movimentacao mov) {
+        app.setContentView(R.layout.add_data); // Muda para a tela para adicionar movimentacoes
+
+        EditText nome = app.findViewById(R.id.nome);
+        EditText data = app.findViewById(R.id.data);
+        EditText valor = app.findViewById(R.id.valor);
+        CheckBox fixa = app.findViewById(R.id.fixa);
+        Spinner sp = app.findViewById(R.id.categoria);
+
+        nome.setText(mov.getNome());
+        String dataCompleta = mov.getDiaMes()[0] + "" + mov.getDiaMes()[1];
+        data.setText(dataCompleta);
+        valor.setText(mov.getValor());
+        fixa.setChecked(false);
+        check(fixa);
+
+        View btn_rend = app.findViewById(R.id.btn_rend);
+        View btn_desp = app.findViewById(R.id.btn_desp);
+        View btn_save = app.findViewById(R.id.btn_save);
+
+        btn_desp.setOnClickListener(despesa);
+        btn_rend.setOnClickListener(renda);
+        btn_save.setOnClickListener(save);
+
+        if(mov.getValor() > 0) {
+            despesa(btn_rend); // Inicia movimentacao como uma renda
+        }
+        else {
+            despesa(btn_desp); // Inicia movimentacao como uma despesa
+        }
     }
 
     // Chamadas de listeners de botoes

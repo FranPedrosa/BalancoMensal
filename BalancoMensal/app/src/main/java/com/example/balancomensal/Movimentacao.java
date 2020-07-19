@@ -9,7 +9,7 @@ public class Movimentacao implements Serializable {
 	private int categoria;
 
 	//oi teste de commit me da meu credito Fran "the não da credito" Pedrosa
-	Movimentacao(String n,int d, int m, int a, int v, int cat){
+	Movimentacao(String n, int d, int m, int a, int v, int cat) {
 		Nome = n;
 		diaMes[0] = d;
 		diaMes[1] = m;

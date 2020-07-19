@@ -36,9 +36,9 @@
         </LinearLayout>
 
         <com.example.balancomensal.Calendario
-        android:id="@+id/calendario"
-        android:layout_width="match_parent"
-        android:layout_height="249dp" />
+            android:id="@+id/calendario"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
         <com.example.balancomensal.ListaMov
             android:id="@+id/lista"
