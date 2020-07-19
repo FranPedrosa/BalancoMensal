@@ -152,12 +152,10 @@ public class Dados implements Serializable {
         LocalDate ld = null;
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
             ld = LocalDate.now();
-            int mes_novo = ld.getMonthValue();
+            int mes_novo = ld.getMonthValue()-1;
             int ano_novo = ld.getYear();
-            int mes_diff = mes_novo - mes_atual;
-            mes_diff += (ano_novo - ano) * 12;
 
-            for (int i = 0; i < mes_diff; i++) {
+            for (int i = mes_atual; mes_atual != mes_novo || ano_novo != ano;) {
                 mes_atual++;
                 if (mes_atual == 12) {
                     ano++;
