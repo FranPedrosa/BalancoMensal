@@ -74,7 +74,9 @@ public class Dados implements Serializable {
             for(int i=0;i<tamFixas;i++){
                 if(listaFixas[i] == null) {
                     listaFixas[i] = f;
-                    fixaParaMovi(listaFixas[i]);
+                    if(f.getDiaMes()[1] == mes_atual){
+                        fixaParaMovi(listaFixas[i]);
+                    }
                     numFixas++;
                     return;
                 }
@@ -145,9 +147,20 @@ public class Dados implements Serializable {
 
     private void todasFixas(){
         for(int i = 0;i < tamFixas;i++){
-            int[] data = new int[]{listaFixas[i].getDiaMes()[0],mes_atual};
-            listaFixas[i].setDiaMes(data);
-            fixaParaMovi(listaFixas[i]);
+
+            if(listaFixas[i].getDiaMes()[1] == mes_atual){
+                fixaParaMovi(listaFixas[i]);
+                int[] data = new int[]{listaFixas[i].getDiaMes()[0],mes_atual};
+
+                if(data[1] == 11){              //
+                    data[1] = 0;                //
+                }else{                          //GAMBIARRA
+                    data[1] = mes_atual + 1;    //
+                }                               //
+
+                listaFixas[i].setDiaMes(data);
+            }
+
         }
     }
 
