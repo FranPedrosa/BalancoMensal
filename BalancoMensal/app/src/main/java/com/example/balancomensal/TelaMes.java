@@ -1,5 +1,6 @@
 package com.example.balancomensal;
 import android.content.Context;
+import android.os.Build;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
@@ -11,16 +12,20 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class TelaMes{
 
     AppCompatActivity app;
     Dados db;
+    int ano;
 
-    public TelaMes(AppCompatActivity app, int mes, Dados dados) {
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public TelaMes(AppCompatActivity app, int mes, int ano, Dados dados) {
         this.app = app;
         this.db = dados;
+        this.ano = ano;
         app.setContentView(R.layout.tela_mes);
         Calendario c = app.findViewById(R.id.calendario);
         ListaMov lm = app.findViewById(R.id.lista);
@@ -29,11 +34,11 @@ public class TelaMes{
         tw.setText(dados.getMes(mes).getTotal() + "");
         p.setMes(dados.getMes(mes));
         lm.setMes(dados.getMes(mes));
-        c.setMes(dados.getMes(mes),2020,mes);
+        c.setMes(dados.getMes(mes),ano,mes);
         c.setOnTouchListener(toque);
 
         Meses menu = app.findViewById(R.id.menu2);
-        menu.setMes(0,11);
+        menu.setMes(dados.getMesAtual(),dados.getAno());
         menu.setOnTouchListener(fechado);
         Button retornar = app.findViewById(R.id.return_btn);
         retornar.setOnClickListener(voltar);
@@ -67,16 +72,18 @@ public class TelaMes{
     };
 
     View.OnTouchListener aberto = new View.OnTouchListener() {
+        @RequiresApi(api = Build.VERSION_CODES.O)
         @Override
         public boolean onTouch(View v, MotionEvent event) {
 
             Meses menu = (Meses) v;
             int x = (int)event.getX();
             int y = (int)event.getY();
-            int i = y/80;
+            int i = menu.getMes(y);
+            if(i > db.getMesAtual()) ano--;
 
             if(i < 12 && x < 500){
-                new TelaMes(app,i,db);
+                new TelaMes(app,i,ano,db);
                 return true;
             }
             else{
