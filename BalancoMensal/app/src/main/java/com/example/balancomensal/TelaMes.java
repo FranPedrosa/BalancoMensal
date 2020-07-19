@@ -19,13 +19,11 @@ public class TelaMes{
 
     AppCompatActivity app;
     Dados db;
-    int ano;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    public TelaMes(AppCompatActivity app, int mes, int ano, Dados dados) {
+    public TelaMes(AppCompatActivity app, int mes, Dados dados) {
         this.app = app;
         this.db = dados;
-        this.ano = ano;
         app.setContentView(R.layout.tela_mes);
         Calendario c = app.findViewById(R.id.calendario);
         ListaMov lm = app.findViewById(R.id.lista);
@@ -34,6 +32,7 @@ public class TelaMes{
         tw.setText(dados.getMes(mes).getTotal() + "");
         p.setMes(dados.getMes(mes));
         lm.setMes(dados.getMes(mes));
+        int ano = mes > db.getMesAtual()? db.getAno()-1: db.getAno();
         c.setMes(dados.getMes(mes),ano,mes);
         c.setOnTouchListener(toque);
 
@@ -80,10 +79,9 @@ public class TelaMes{
             int x = (int)event.getX();
             int y = (int)event.getY();
             int i = menu.getMes(y);
-            if(i > db.getMesAtual()) ano--;
 
             if(i < 12 && x < 500){
-                new TelaMes(app,i,ano,db);
+                new TelaMes(app,i,db);
                 return true;
             }
             else{
