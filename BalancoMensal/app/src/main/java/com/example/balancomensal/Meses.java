@@ -17,6 +17,7 @@ public class Meses extends View {
 
     private int primeiroMes;
     private int ultimoMes;
+    private int ano;
     private Paint p;
     boolean aberto;
 
@@ -32,9 +33,10 @@ public class Meses extends View {
         p = new Paint();
     }
 
-    public void setMes(int com, int fim){
-        this.primeiroMes = com;
-        this.ultimoMes = fim;
+    public void setMes(int mes, int ano){
+        this.primeiroMes = (mes+1) % 12;
+        this.ultimoMes = mes;
+        this.ano = ano;
     }
 
     @Override
@@ -57,17 +59,22 @@ public class Meses extends View {
         int y = 0;
         p.setTextSize(70);
         p.setTextAlign(Paint.Align.LEFT);
-
-        for( int i = primeiroMes; i < ultimoMes; i++){
+        ano = ano -1;
+        for( int j = 0; j < 12; j++){
+            int i = (primeiroMes + j) % 12;
+            if(i == 0){
+                ano++;
+            }
+            System.out.println(i + " " + j);
             if(i % 2 == 0){
                 p.setColor(Color.LTGRAY);
             }
             else{
                 p.setColor(Color.GRAY);
             }
-            canvas.drawRect(0,i*80,500,i*80 + 80,p);
+            canvas.drawRect(0,j*80,600,j*80 + 80,p);
             p.setColor(Color.BLACK);
-            canvas.drawText(meses[i],60,i*80 + 70,p);
+            canvas.drawText(meses[i] + " " + ano,60,j*80 + 70,p);
         }
     }
 
@@ -92,6 +99,10 @@ public class Meses extends View {
         p.setTextAlign(Paint.Align.CENTER);
 
         canvas.drawText("Meses",175,185,p);
+    }
+
+    public int getMes(int y){
+        return (y/80 - primeiroMes +14) % 12;
     }
 
 
