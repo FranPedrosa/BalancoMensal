@@ -57,7 +57,7 @@ public class Pizza extends View{
 
     private Paint p;
     private double[] val;
-    private final int[] cores= {Color.RED,Color.YELLOW,Color.GREEN,Color.BLUE,Color.CYAN,Color.GRAY,Color.MAGENTA};
+    private final int[] cores= { Color.RED,Color.RED,Color.YELLOW,Color.GREEN,Color.BLUE,Color.CYAN,Color.GRAY,Color.MAGENTA};
 
     @Override
     protected void onDraw(Canvas canvas){
@@ -74,13 +74,13 @@ public class Pizza extends View{
         float lefttext = (float)(w*0.81);
         float right = (float)(w*0.79);
         p.setTextSize(30);
-        for(int i = 0; i < 6; i++){
-            float top = (float)(h*(0.70+i*0.05));
-            float toptext = (float)(h*(0.73+i*0.05));
+        for(int i = 1; i < 7; i++){
+            float top = (float)(h*(0.70+(i-1)*0.05));
+            float toptext = (float)(h*(0.73+(i-1)*0.05));
             float bottom = (float)(h*(0.74+i*0.05));
             p.setColor(cores[i]);
             canvas.drawRect(left,top,right,bottom,p);
-            canvas.drawText(Mes.NOME_CATEGORIAS[i+1],lefttext,toptext,p);
+            canvas.drawText(Mes.NOME_CATEGORIAS[i],lefttext,toptext,p);
         }
     }
 
