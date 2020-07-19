@@ -35,9 +35,10 @@ public class Calendario extends View{
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void setMes(Mes mes, int ano, int numeroDoMes){
 
-        LocalDate ld = LocalDate.now();
+        LocalDate ld = LocalDate.of(ano, numeroDoMes+1, 1);
 
         this.dia1 = ld.getDayOfWeek().getValue();
+
         this.mes = mes;
         this.numeroDoMes = numeroDoMes;
         if(ano % 400 == 0 || (ano % 4 == 0 && ano % 100 != 0)){
@@ -95,5 +96,10 @@ public class Calendario extends View{
             dia = -1;
         }
         return dia;
+    }
+
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec){
+        setMeasuredDimension(widthMeasureSpec,800);
     }
 }

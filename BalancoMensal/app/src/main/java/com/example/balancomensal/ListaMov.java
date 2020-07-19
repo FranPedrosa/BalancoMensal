@@ -106,8 +106,8 @@ public class ListaMov extends View implements View.OnTouchListener {
             if(i > 0){
                 //TelaApagar
             }
-        }else if(x > 5*w/6){
-            //Tela editar
+        } else if(x > 5*w/6) {
+            //TelaEditar
         }
         return false;
     }
