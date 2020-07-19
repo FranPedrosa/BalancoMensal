@@ -1,5 +1,6 @@
 package com.example.balancomensal;
 
+import android.os.Build;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
@@ -7,6 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class TelaPrincipal {
@@ -40,7 +42,7 @@ public class TelaPrincipal {
         btn_add.setOnClickListener(adicionar);
 
         Meses btn_meses = app.findViewById(R.id.menu);
-        btn_meses.setMes(0,11);
+        btn_meses.setMes(db.getMesAtual(),db.getAno());
         btn_meses.setOnTouchListener(fechado);
 
     }
@@ -69,16 +71,19 @@ public class TelaPrincipal {
     };
 
     View.OnTouchListener aberto = new View.OnTouchListener() {
+        @RequiresApi(api = Build.VERSION_CODES.O)
         @Override
         public boolean onTouch(View v, MotionEvent event) {
 
             Meses menu = (Meses) v;
             int x = (int)event.getX();
             int y = (int)event.getY();
-            int i = y/80;
+            int i = menu.getMes(y);
+            int ano = db.getAno();
+            if(i > db.getMesAtual()) ano = db.getAno() -1;
 
-            if(i < 12 && x < 500){
-                new TelaMes(app,i,db);
+            if(i < 12 && x < 600){
+                new TelaMes(app,i,ano,db);
             }
             else{
                 menu.aberto = false;
