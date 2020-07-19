@@ -25,7 +25,7 @@ public class TelaPrincipal {
 
         Grafico g = app.findViewById(R.id.grafico);
         Pizza p = app.findViewById(R.id.pizza2);
-        g.setDados(db.getTotalMeses(12));
+        g.setDados(db.getTotalMeses(12),db.getMesAtual());
         p.setDados(db,12);
 
         Spinner tempo = app.findViewById(R.id.tempo);
@@ -97,7 +97,7 @@ public class TelaPrincipal {
             Grafico g = app.findViewById(R.id.grafico);
             Pizza p = app.findViewById(R.id.pizza2);
             int[] meses = {12,6,3,1};
-            g.setDados(db.getTotalMeses(meses[position]));
+            g.setDados(db.getTotalMeses(meses[position]),db.getMesAtual());
             p.setDados(db,meses[position]);
         }
 
