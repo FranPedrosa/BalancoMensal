@@ -74,7 +74,9 @@ public class Dados implements Serializable {
             for(int i=0;i<tamFixas;i++){
                 if(listaFixas[i] == null) {
                     listaFixas[i] = f;
+                    fixaParaMovi(listaFixas[i]);
                     numFixas++;
+                    return;
                 }
             }
         }
@@ -83,7 +85,7 @@ public class Dados implements Serializable {
     }
 
     public void fixaParaMovi(Fixa f){
-        Movimentacao m = new Movimentacao(f.getNome(),f.getDiaMes()[0],mes_atual,ano,f.getValor(),f.getCategoria());
+        Movimentacao m = new Movimentacao(f.getNome(),f.getDiaMes()[0],f.getDiaMes()[1],ano,f.getValor(),f.getCategoria());
         add(m);
         f.setDuracao(f.getDuracao()-1);
         if(f.getDuracao() == 0){
@@ -143,6 +145,8 @@ public class Dados implements Serializable {
 
     private void todasFixas(){
         for(int i = 0;i < tamFixas;i++){
+            int[] data = new int[]{listaFixas[i].getDiaMes()[0],mes_atual};
+            listaFixas[i].setDiaMes(data);
             fixaParaMovi(listaFixas[i]);
         }
     }
