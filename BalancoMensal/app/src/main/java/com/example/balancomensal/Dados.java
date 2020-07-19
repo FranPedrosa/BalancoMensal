@@ -35,11 +35,10 @@ public class Dados implements Serializable {
         this.mes_atual = mes;
         this.ano = ano;
     }
-    // funcao de salvar dados
-    //funcao de resgatar dados
 
-    public void setMesAtual(int mes){mes_atual = mes;}
-    public void setAno(int a){ano = a;}
+
+    public int getMesAtual(){return mes_atual;}
+    public int getAno(){return ano;}
 
     public double[] getMediaCategoriaMeses(int meses){
             double mediaCategorias[] = new double[7];
@@ -52,6 +51,10 @@ public class Dados implements Serializable {
                 }
             }
             return mediaCategorias;
+    }
+    public void novoMes(){
+        Mes mes = new Mes();
+        listaMes[mes_atual] = mes;
     }
 
     public double[] getTotalMeses(int meses){
@@ -160,6 +163,7 @@ public class Dados implements Serializable {
                     ano++;
                     mes_atual = 0;
                 }
+                novoMes();
                 todasFixas();
             }
         }
