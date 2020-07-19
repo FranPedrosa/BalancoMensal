@@ -37,8 +37,8 @@ public class Dados implements Serializable {
     }
 
 
-    public void setMesAtual(int mes){mes_atual = mes;}
-    public void setAno(int a){ano = a;}
+    public int getMesAtual(){return mes_atual;}
+    public int getAno(){return ano;}
 
     public double[] getMediaCategoriaMeses(int meses){
             double mediaCategorias[] = new double[7];
