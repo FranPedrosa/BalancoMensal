@@ -12,24 +12,26 @@ import android.widget.AbsListView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
-public class ListaMov extends View implements View.OnTouchListener {
+import androidx.appcompat.app.AppCompatActivity;
+
+public class ListaMov extends View{
 
     private Mes mes;
+    private int nMes;
     private Paint p;
-    private int altura;
     private int dia = -1;
+    int[] id;
+    Movimentacao[] ms;
 
     public ListaMov(Context context, AttributeSet attrs) {
         super(context,attrs);
         p = new Paint();
-        setOnTouchListener(this);
         setWillNotDraw(false);
     }
 
     public ListaMov(Context context) {
         super(context);
         p = new Paint();
-        setOnTouchListener(this);
         setWillNotDraw(false);
     }
 
@@ -39,15 +41,17 @@ public class ListaMov extends View implements View.OnTouchListener {
         invalidate();
     }
 
-    public void setMes(Mes mes){
+    public void setMes(Mes mes,int nMes){
         this.mes = mes;
+        this.nMes = nMes;
     }
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec){
-        Movimentacao[] m = mes.findMovData(dia);
         int i = 0;
-        while(m[i] != null){
+        id = mes.findIdData(dia);
+        ms = mes.findMovData(dia);
+        while(ms[i] != null){
             i++;
         }
         setMeasuredDimension(widthMeasureSpec,i*50 + 120);
@@ -95,20 +99,16 @@ public class ListaMov extends View implements View.OnTouchListener {
         this.setLayoutParams(new LinearLayout.LayoutParams(RelativeLayout.LayoutParams.FILL_PARENT,y));
     }
 
-    @Override
-    public boolean onTouch(View v, MotionEvent event) {
-        int x = (int)event.getX();
-        int y = (int)event.getY();
+    public void Toque(int x, int y, AppCompatActivity app, Dados db) {
         int w = getWidth();
-        int h = getHeight();
         int i = (y-120)/50;
-        if(x > 5*w/6){
-            if(i > 0){
-                //TelaApagar
+        if(i >= 0){
+            if(x > 5*w/6){
+                new Confirmacao(app,db,nMes,id[i]);
             }
-        } else if(x > 5*w/6) {
-            //TelaEditar
+            else if(x > 2*w/3) {
+                new AddData(app, db, ms[i], id[i], nMes);
+            }
         }
-        return false;
     }
 }

@@ -15,7 +15,7 @@ import android.widget.Toast;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
-public class TelaMes{
+public class TelaMes {
 
     AppCompatActivity app;
     Dados db;
@@ -31,13 +31,15 @@ public class TelaMes{
         TextView tw = app.findViewById(R.id.total);
         tw.setText(dados.getMes(mes).getTotal() + "");
         p.setMes(dados.getMes(mes));
-        lm.setMes(dados.getMes(mes));
-        int ano = mes > db.getMesAtual()? db.getAno()-1: db.getAno();
-        c.setMes(dados.getMes(mes),ano,mes);
+        lm.setMes(dados.getMes(mes), mes);
+        int ano = mes > db.getMesAtual() ? db.getAno() - 1 : db.getAno();
+        c.setMes(dados.getMes(mes), ano, mes);
         c.setOnTouchListener(toque);
 
+        lm.setOnTouchListener(toqueLis);
+
         Meses menu = app.findViewById(R.id.menu2);
-        menu.setMes(dados.getMesAtual(),dados.getAno());
+        menu.setMes(dados.getMesAtual(), dados.getAno());
         menu.setOnTouchListener(fechado);
         Button retornar = app.findViewById(R.id.return_btn);
         retornar.setOnClickListener(voltar);
@@ -48,7 +50,7 @@ public class TelaMes{
         public boolean onTouch(View v, MotionEvent event) {
             Calendario c = app.findViewById(R.id.calendario);
             ListaMov lm = app.findViewById(R.id.lista);
-            int dia = c.getDia((int)event.getX(),(int)event.getY());
+            int dia = c.getDia((int) event.getX(), (int) event.getY());
             lm.setDia(dia);
             return false;
         }
@@ -59,9 +61,9 @@ public class TelaMes{
         public boolean onTouch(View v, MotionEvent event) {
 
             Meses menu = (Meses) v;
-            int x = (int)event.getX();
-            int y = (int)event.getY();
-            if(x > 100 && x < 250 && y > 100 && y < 250){
+            int x = (int) event.getX();
+            int y = (int) event.getY();
+            if (x > 100 && x < 250 && y > 100 && y < 250) {
                 menu.aberto = true;
                 menu.setOnTouchListener(aberto);
                 menu.invalidate();
@@ -76,15 +78,14 @@ public class TelaMes{
         public boolean onTouch(View v, MotionEvent event) {
 
             Meses menu = (Meses) v;
-            int x = (int)event.getX();
-            int y = (int)event.getY();
+            int x = (int) event.getX();
+            int y = (int) event.getY();
             int i = menu.getMes(y);
 
-            if(i < 12 && x < 500){
-                new TelaMes(app,i,db);
+            if (i < 12 && x < 500) {
+                new TelaMes(app, i, db);
                 return true;
-            }
-            else{
+            } else {
                 menu.aberto = false;
                 menu.invalidate();
                 menu.setOnTouchListener(fechado);
@@ -96,7 +97,19 @@ public class TelaMes{
 
     View.OnClickListener voltar = new View.OnClickListener() {
         public void onClick(View v) {
-            new TelaPrincipal(app,db);
+            new TelaPrincipal(app, db);
+        }
+    };
+
+    View.OnTouchListener toqueLis = new View.OnTouchListener() {
+        @Override
+        public boolean onTouch(View v, MotionEvent event) {
+            int x = (int) event.getX();
+            int y = (int) event.getY();
+            ListaMov lm = (ListaMov) v;
+            lm.Toque(x, y, app, db);
+            return false;
         }
     };
 }
+

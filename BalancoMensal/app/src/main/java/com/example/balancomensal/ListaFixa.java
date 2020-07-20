@@ -1,51 +1,44 @@
-package com.example.balancomensal;
+/*package com.example.balancomensal;
 
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.AbsListView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
-public class ListaMov extends View implements View.OnTouchListener {
+public class ListaFixa extends View implements View.OnTouchListener {
 
-    private Mes mes;
+    private Dados db;
     private Paint p;
-    private int altura;
     private int dia = -1;
 
-    public ListaMov(Context context, AttributeSet attrs) {
+    public ListaFixa(Context context, AttributeSet attrs) {
         super(context,attrs);
         p = new Paint();
         setOnTouchListener(this);
         setWillNotDraw(false);
     }
 
-    public ListaMov(Context context) {
+    public ListaFixa(Context context) {
         super(context);
         p = new Paint();
         setOnTouchListener(this);
         setWillNotDraw(false);
     }
 
-    public void setDia(int dia){
-        this.dia = dia;
+    public void setDados(Dados db){
+        this.db = db;
         requestLayout();
         invalidate();
     }
 
-    public void setMes(Mes mes){
-        this.mes = mes;
-    }
-
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec){
-        Movimentacao[] m = mes.findMovData(dia);
+        Fixa[] m = (dia);
         int i = 0;
         while(m[i] != null){
             i++;
@@ -112,3 +105,4 @@ public class ListaMov extends View implements View.OnTouchListener {
         return false;
     }
 }
+*/

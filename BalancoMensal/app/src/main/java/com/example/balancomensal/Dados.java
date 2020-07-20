@@ -69,6 +69,15 @@ public class Dados implements Serializable {
         listaMes[m.getDiaMes()[1]].addMovimentacao(m);
     }
 
+    public void add(Movimentacao m,int pos){
+        listaMes[m.getDiaMes()[1]].atualizarMov(pos,m);
+    }
+
+    public void remover(int mes,int pos){
+        System.out.println("Remove o mes do pos : " + mes +","+pos);
+        listaMes[mes].removerMov(pos);
+    }
+
     public void addFixa(Fixa f){
         if(numFixas < tamFixas){
             for(int i=0;i<tamFixas;i++){

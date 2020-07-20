@@ -72,7 +72,7 @@ public class Mes implements Serializable {
 		Movimentacao[] lm = new Movimentacao[30];
 		int j=0;
 		for(int i = 0; i < numMov; i++){
-			if(listaMov[i].getDiaMes()[0] == dia) {
+			if(listaMov[i] != null && listaMov[i].getDiaMes()[0] == dia) {
 				lm[j] = listaMov[i];
 				j++;
 			}
@@ -90,7 +90,7 @@ public class Mes implements Serializable {
 		int [] nov = new int[30];
 		int j=0;
 		for(int i = 0; i < numMov; i++){
-			if(listaMov[i].getDiaMes()[0] == dia) {
+			if(listaMov[i] != null && listaMov[i].getDiaMes()[0] == dia) {
 				nov[j] = i;
 				j++;
 			}
@@ -107,7 +107,9 @@ public class Mes implements Serializable {
 	public boolean[] marcadorMes(){
 		boolean[] marcador = new boolean[31];
 		for(int i=0;i<numMov;i++){
-			marcador[listaMov[i].getDiaMes()[0]] = true;
+			if(listaMov[i] != null) {
+				marcador[listaMov[i].getDiaMes()[0]] = true;
+			}
 		}
 		return marcador;
 	}
