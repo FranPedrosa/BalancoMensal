@@ -83,36 +83,13 @@ public class Dados implements Serializable {
             for(int i=0;i<tamFixas;i++){
                 if(listaFixas[i] == null) {
                     listaFixas[i] = f;
-                    if(f.getDiaMes()[1] == mes_atual){
-                        fixaParaMovi(listaFixas[i]);
-                        int[] data = new int[]{listaFixas[i].getDiaMes()[0],mes_atual};
-
-                        if(data[1] == 11){              //
-                            data[1] = 0;                //
-                        }else{                          //GAMBIARRA
-                            data[1] = mes_atual + 1;    //
-                        }                               //
-
-                        listaFixas[i].setDiaMes(data);
-                    }
+                    fixaParaMovi(listaFixas[i]);
                     numFixas++;
                     return;
                 }
             }
         }
         listaFixas[tamFixas] = f;
-        if(f.getDiaMes()[1] == mes_atual){
-            fixaParaMovi(listaFixas[tamFixas]);
-            int[] data = new int[]{listaFixas[tamFixas].getDiaMes()[0],mes_atual};
-
-            if(data[1] == 11){              //
-                data[1] = 0;                //
-            }else{                          //GAMBIARRA
-                data[1] = mes_atual + 1;    //
-            }                               //
-
-            listaFixas[tamFixas].setDiaMes(data);
-        }
         tamFixas++;
     }
 
@@ -177,20 +154,7 @@ public class Dados implements Serializable {
 
     private void todasFixas(){
         for(int i = 0;i < tamFixas;i++){
-
-            if(listaFixas[i].getDiaMes()[1] == mes_atual){
-                fixaParaMovi(listaFixas[i]);
-                int[] data = new int[]{listaFixas[i].getDiaMes()[0],mes_atual};
-
-                if(data[1] == 11){              //
-                    data[1] = 0;                //
-                }else{                          //GAMBIARRA
-                    data[1] = mes_atual + 1;    //
-                }                               //
-
-                listaFixas[i].setDiaMes(data);
-            }
-
+            fixaParaMovi(listaFixas[i]);
         }
     }
 
