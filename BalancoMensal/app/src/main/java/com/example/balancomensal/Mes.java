@@ -86,6 +86,24 @@ public class Mes implements Serializable {
 		return aux;
 	}
 
+	public int[] findIdData(int dia){
+		int [] nov = new int[30];
+		int j=0;
+		for(int i = 0; i < numMov; i++){
+			if(listaMov[i].getDiaMes()[0] == dia) {
+				nov[j] = i;
+				j++;
+			}
+		}
+		int[]	aux = new int[j+1];
+		for(int i = 0;i < j; i++){
+			aux[i] = nov[i];
+		}
+		aux[j] = -1;
+
+		return aux;
+	}
+
 	public boolean[] marcadorMes(){
 		boolean[] marcador = new boolean[31];
 		for(int i=0;i<numMov;i++){
@@ -101,4 +119,13 @@ public class Mes implements Serializable {
 		}
 		return findMovData(dia);
 	}
+
+	public void atualizarMov(int j,Movimentacao nova){
+		listaMov[j] = nova;
+	}
+
+	public void removerMov(int j){
+		listaMov[j] = null;
+	}
+
 }
