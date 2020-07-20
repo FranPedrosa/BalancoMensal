@@ -18,6 +18,8 @@ public class AddData implements AdapterView.OnItemSelectedListener {
     String data;
     String valor;
     boolean fixa;
+    int pos = -1;
+    int mesAntigo = -1;
     String categoria;
 
     AppCompatActivity app;
@@ -51,25 +53,31 @@ public class AddData implements AdapterView.OnItemSelectedListener {
         check(fixa); // Inicia movimentacao como nao fixa
     }
 
-    public AddData(Movimentacao mov) {
+    public AddData(AppCompatActivity app, Dados db, Movimentacao mov, int pos, int nMes) {
+        this.app = app;
+        this.db = db; // Novidade
+
         app.setContentView(R.layout.add_data); // Muda para a tela para adicionar movimentacoes
 
-        EditText nome = app.findViewById(R.id.nome);
-        EditText data = app.findViewById(R.id.data);
-        EditText valor = app.findViewById(R.id.valor);
-        CheckBox fixa = app.findViewById(R.id.fixa);
-        Spinner sp = app.findViewById(R.id.categoria);
+        this.pos = pos;
+        this.mesAntigo = nMes;
+
+        EditText nome = this.app.findViewById(R.id.nome);
+        EditText data = this.app.findViewById(R.id.data);
+        EditText valor = this.app.findViewById(R.id.valor);
+        CheckBox fixa = this.app.findViewById(R.id.fixa);
+        Spinner sp = this.app.findViewById(R.id.categoria);
 
         nome.setText(mov.getNome());
-        String dataCompleta = mov.getDiaMes()[0] + "" + mov.getDiaMes()[1];
+        String dataCompleta = mov.getDiaMes()[0] + " " + mov.getDiaMes()[1];
         data.setText(dataCompleta);
-        valor.setText(mov.getValor());
+        valor.setText(mov.getValor() + "");
         fixa.setChecked(false);
         check(fixa);
 
-        View btn_rend = app.findViewById(R.id.btn_rend);
-        View btn_desp = app.findViewById(R.id.btn_desp);
-        View btn_save = app.findViewById(R.id.btn_save);
+        View btn_rend = this.app.findViewById(R.id.btn_rend);
+        View btn_desp = this.app.findViewById(R.id.btn_desp);
+        View btn_save = this.app.findViewById(R.id.btn_save);
 
         btn_desp.setOnClickListener(despesa);
         btn_rend.setOnClickListener(renda);
@@ -241,7 +249,19 @@ public class AddData implements AdapterView.OnItemSelectedListener {
                 int dia = DDMM / 100;
                 int mes = DDMM % 100;
                 Movimentacao m = new Movimentacao(nom,dia-1,mes-1,2020,numValor,cat);
-                db.add(m);
+                if(pos == -1){
+                    db.add(m);
+                }
+                else{
+                    if(mes == mesAntigo){
+                        db.add(m,pos);
+                    }
+                    else{
+                        System.out.println("Oi tudo bem, eu estou mudando de Mês.");
+                        db.remover(mesAntigo,pos);
+                        db.add(m);
+                    }
+                }
                 new TelaPrincipal(app,db);
             }
             else
