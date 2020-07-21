@@ -37,7 +37,7 @@ public class TelaFixas {
             int x = (int)event.getX();
             int y = (int)event.getY();
             int w = v.getWidth();
-            final int i = (y-120)/50;
+            final int i = y/50;
             if( i >= 0){
                 if(x > 5*w/6){
                     new Confirmacao(app,"Você tem certeza que quer apagar a movimentação fixa?","Apagar","Cancelar") {

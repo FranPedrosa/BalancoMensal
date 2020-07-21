@@ -43,7 +43,7 @@ public class ListaFixa extends View{
                 i++;
             }
         }
-        setMeasuredDimension(widthMeasureSpec,i*50 + 120);
+        setMeasuredDimension(widthMeasureSpec,i*50 );
     }
 
     @Override
@@ -57,7 +57,7 @@ public class ListaFixa extends View{
         p.setColor(Color.BLACK);
 
 
-        int y = 120;
+        int y = 0;
         p.setTextSize(40);
         p.setTextAlign(Paint.Align.LEFT);
         for(int i = 0; i < 20; i++){
