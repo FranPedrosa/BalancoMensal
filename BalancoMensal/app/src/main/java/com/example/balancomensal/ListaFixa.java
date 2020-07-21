@@ -1,4 +1,4 @@
-/*package com.example.balancomensal;
+package com.example.balancomensal;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -10,38 +10,38 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
-public class ListaFixa extends View implements View.OnTouchListener {
+public class ListaFixa extends View{
 
-    private Dados db;
+    private Fixa[] fixas;
+    private int tam = 0;
     private Paint p;
     private int dia = -1;
 
     public ListaFixa(Context context, AttributeSet attrs) {
         super(context,attrs);
         p = new Paint();
-        setOnTouchListener(this);
         setWillNotDraw(false);
     }
 
     public ListaFixa(Context context) {
         super(context);
         p = new Paint();
-        setOnTouchListener(this);
         setWillNotDraw(false);
     }
 
-    public void setDados(Dados db){
-        this.db = db;
+    public void setDados(Fixa[] fixas){
+        this.fixas = fixas;
         requestLayout();
         invalidate();
     }
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec){
-        Fixa[] m = (dia);
         int i = 0;
-        while(m[i] != null){
-            i++;
+        for (int j = 0; j < 20;j++) {
+            if (fixas[i] != null) {
+                i++;
+            }
         }
         setMeasuredDimension(widthMeasureSpec,i*50 + 120);
     }
@@ -58,51 +58,29 @@ public class ListaFixa extends View implements View.OnTouchListener {
 
 
         int y = 120;
-        Movimentacao[] m = mes.findMovData(dia);
-        int i = 0;
-        p.setTextAlign(Paint.Align.CENTER);
-        p.setTextSize(60);
-        if(dia != -1) {
-            canvas.drawText("Dia " + (dia + 1), w / 2, 80, p);
-        }
         p.setTextSize(40);
         p.setTextAlign(Paint.Align.LEFT);
-
-        while(m[i] != null){
+        for(int i = 0; i < 20; i++){
+            if(fixas[i] == null){
+                continue;
+            }
             p.setColor(Color.BLACK);
-            canvas.drawText(m[i].getNome(),60,y+40,p);
-            if(m[i].getValor() >= 0){
+            canvas.drawText(fixas[i].getNome(),60,y+40,p);
+            if(fixas[i].getCategoria() == 0){
                 p.setColor(Color.GREEN);
             }
             else{
                 p.setColor(Color.RED);
             }
-            canvas.drawText("R$" + Math.abs(m[i].getValor()),w/3,y+40,p);
+            canvas.drawText("R$" + Math.abs(fixas[i].getValor()),w/3,y+40,p);
             p.setColor(Color.GREEN);
             canvas.drawText("Editar",2*w/3,y+40,p);
             p.setColor(Color.RED);
             canvas.drawText("Apagar",5*w/6,y+40,p);
             y += 50;
-            i++;
         }
         this.setLayoutParams(new LinearLayout.LayoutParams(RelativeLayout.LayoutParams.FILL_PARENT,y));
     }
 
-    @Override
-    public boolean onTouch(View v, MotionEvent event) {
-        int x = (int)event.getX();
-        int y = (int)event.getY();
-        int w = getWidth();
-        int h = getHeight();
-        int i = (y-120)/50;
-        if(x > 5*w/6){
-            if(i > 0){
-                //TelaApagar
-            }
-        } else if(x > 5*w/6) {
-            //TelaEditar
-        }
-        return false;
-    }
+
 }
-*/
