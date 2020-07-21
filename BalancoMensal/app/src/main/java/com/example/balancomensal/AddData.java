@@ -72,7 +72,7 @@ public class AddData implements AdapterView.OnItemSelectedListener {
         String dataCompleta = mov.getDiaMes()[0] + " " + mov.getDiaMes()[1];
         data.setText(dataCompleta);
         valor.setText(mov.getValor() + "");
-        fixa.setChecked(false);
+        fixa.setChecked(true);
         check(fixa);
 
         View btn_rend = this.app.findViewById(R.id.btn_rend);
@@ -88,6 +88,48 @@ public class AddData implements AdapterView.OnItemSelectedListener {
         }
         else {
             despesa(btn_desp); // Inicia movimentacao como uma despesa
+        }
+    }
+
+    public AddData(AppCompatActivity app, Dados db, int pos) {
+        this.app = app;
+        this.db = db;
+
+        Fixa f = db.getFixas()[pos];
+
+        app.setContentView(R.layout.add_data); // Muda para a tela para adicionar movimentacoes
+
+        this.pos = pos;
+
+        EditText nome = this.app.findViewById(R.id.nome);
+        EditText data = this.app.findViewById(R.id.data);
+        EditText valor = this.app.findViewById(R.id.valor);
+        CheckBox fixa = this.app.findViewById(R.id.fixa);
+        Spinner sp = this.app.findViewById(R.id.categoria);
+        EditText dur = this.app.findViewById(R.id.duracao);
+
+        nome.setText(f.getNome());
+        String dataCompleta = String.format("%02d",f.getDiaMes()[0]+1);
+        data.setText(dataCompleta);
+        valor.setText(f.getValor() + "");
+        fixa.setChecked(true);
+        check(fixa);
+        dur.setText(f.getDuracao() + "");
+
+        View btn_rend = this.app.findViewById(R.id.btn_rend);
+        View btn_desp = this.app.findViewById(R.id.btn_desp);
+        View btn_save = this.app.findViewById(R.id.btn_save);
+
+        btn_desp.setOnClickListener(despesa);
+        btn_rend.setOnClickListener(renda);
+        btn_save.setOnClickListener(save);
+
+        if(f.getCategoria() == 0) {
+            renda(btn_rend); // Inicia movimentacao como uma renda
+        }
+        else {
+            despesa(btn_desp); // Inicia movimentacao como uma despesa
+            sp.setSelection(f.getCategoria());
         }
     }
 
@@ -213,17 +255,20 @@ public class AddData implements AdapterView.OnItemSelectedListener {
             Context context = app.getApplicationContext();
             int duration = Toast.LENGTH_LONG;
 
-            if(todosPreenchidos(nom, dat, dur, categoria, val, fixa)) {
+            if(todosPreenchidos(nom, dat + "01", dur, categoria, val, fixa)) {
                 /*==============================================================================
                 Esse código é a gambiarra para pegar os valores.
                 */
-                int DDMM = Integer.parseInt(dat);
+                int dia = Integer.parseInt(dat);
                 int duraca = Integer.parseInt(dur);
                 int numValor = Integer.parseInt(val);
-                int dia = DDMM / 100;
-                int mes = DDMM % 100;
-                Fixa f = new Fixa(nom,dia-1,mes-1, duraca, numValor,cat);
-                db.addFixa(f);
+                Fixa f = new Fixa(nom,dia-1,db.getMesAtual(), duraca, numValor,cat);
+                if(pos == -1) {
+                    db.addFixa(f);
+                }
+                else{
+                    db.atualizarFixa(pos,f);
+                }
                 new TelaPrincipal(app,db);
                 /*
                 Fim da gambiarra.
