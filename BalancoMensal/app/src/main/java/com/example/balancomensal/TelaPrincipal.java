@@ -74,7 +74,9 @@ public class TelaPrincipal {
             Meses menu = (Meses) v;
             int x = (int)event.getX();
             int y = (int)event.getY();
-            if(x > 100 && x < 250 && y > 100 && y < 250){
+            int w = v.getWidth();
+            int h = v.getHeight();
+            if(x > w-170 && x < w-56 && h > h-297 && y < h-184){
                 menu.aberto = true;
                 menu.setOnTouchListener(aberto);
                 menu.invalidate();

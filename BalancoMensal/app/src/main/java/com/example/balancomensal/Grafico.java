@@ -57,6 +57,7 @@ public class Grafico extends View{
         canvas.drawLine(0,h/2,w,h/2,p);
         p.setTextSize(30);
 
+        int k = mesAtual;
         for(int i = 0; i < meses.length; i++){
             int j = meses.length - i -1;
             String valor = String.format("%.2f",Math.abs(meses[i]));
@@ -67,19 +68,19 @@ public class Grafico extends View{
                 canvas.drawText(valor,larg*(j+0.1f),(float)(h/2 - meses[i]*zoom)+35,p);
                 canvas.drawRect(larg*(j+0.1f),h/2,larg*(j+0.8f),(float)(h/2 - meses[i]*zoom),p);
                 p.setColor(Color.BLACK);
-                canvas.drawText(nomes[mesAtual],larg*(j+0.1f),(float)(h/2)-5,p);
+                canvas.drawText(nomes[k],larg*(j+0.1f),(float)(h/2)-5,p);
             }
             else{
                 p.setColor(0xFF338F65);
                 canvas.drawText(valor,larg*(j+0.1f),(float)(h/2 - meses[i]*zoom)-5,p);
                 canvas.drawRect(larg*(j+0.1f),h/2,larg*(j+0.8f),(float)(h/2 - meses[i]*zoom),p);
                 p.setColor(Color.BLACK);
-                canvas.drawText(nomes[mesAtual],larg*(j+0.1f),(float)(h/2)+35,p);
+                canvas.drawText(nomes[k],larg*(j+0.1f),(float)(h/2)+35,p);
             }
 
-            mesAtual--;
-            if(mesAtual == -1){
-                mesAtual = 11;
+            k--;
+            if(k == -1){
+                k = 11;
             }
         }
     }

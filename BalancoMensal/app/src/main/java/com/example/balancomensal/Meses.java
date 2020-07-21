@@ -79,8 +79,6 @@ public class Meses extends View {
 
     private void fechado(Canvas canvas, int w, int h) {
 
-        System.out.printf("Ekhagdfkhasgdadgfhakasdkjdlkaajdfkasjdkasdasaldjalaskdlkajdlkas ===================== asjdjhashdjkashsdkaashhdkaahdkahs");
-
         p.setStyle(Paint.Style.FILL);
         p.setColor(0xffd0d0d0);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
