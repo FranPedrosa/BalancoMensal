@@ -112,7 +112,19 @@ public class Dados implements Serializable {
         }
     }
 
+    public void atualizarFixa(int i,Fixa nova){
+        listaFixas[i] = nova;
+    }
+
+    public void removerFixa(int i){
+        listaFixas[i] = null;
+    }
+
     public Mes getMes(int n){return listaMes[n];}
+
+    public Fixa[] getFixas(){
+        return listaFixas;
+    }
 
     public static Dados abrir(AppCompatActivity app){
 
@@ -154,7 +166,9 @@ public class Dados implements Serializable {
 
     private void todasFixas(){
         for(int i = 0;i < tamFixas;i++){
-            fixaParaMovi(listaFixas[i]);
+            if(listaFixas[i] != null){
+                fixaParaMovi(listaFixas[i]);
+            }
         }
     }
 
