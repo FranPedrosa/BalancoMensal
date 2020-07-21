@@ -45,12 +45,22 @@ public class TelaPrincipal {
         btn_meses.setMes(db.getMesAtual(),db.getAno());
         btn_meses.setOnTouchListener(fechado);
 
+        View fixas_btn = app.findViewById(R.id.fixas);
+        fixas_btn.setOnClickListener(fixas);
+
     }
 
     View.OnClickListener adicionar = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             adicionar(v);
+        }
+    };
+
+    View.OnClickListener fixas = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            new TelaFixas(app,db);
         }
     };
 
