@@ -14,23 +14,19 @@ import androidx.appcompat.app.AppCompatActivity;
 public class AddData implements AdapterView.OnItemSelectedListener {
 
     boolean desp;
-    String nome;
-    String data;
-    String valor;
     boolean fixa;
     int pos = -1;
     int mesAntigo = -1;
-    String categoria;
 
     AppCompatActivity app;
-    Dados db;//Novidade
+    Dados db;
 
 
     public AddData(AppCompatActivity app, Dados db) {
         this.app = app;
-        this.db = db; // Novidade
+        this.db = db;
 
-        app.setContentView(R.layout.add_data); // Muda para a tela para adicionar movimentacoes
+        app.setContentView(R.layout.add_data);
 
         // Inicia o spinner com suas categorias
         Spinner spCategoria = app.findViewById(R.id.categoria);
@@ -69,10 +65,10 @@ public class AddData implements AdapterView.OnItemSelectedListener {
         Spinner sp = this.app.findViewById(R.id.categoria);
 
         nome.setText(mov.getNome());
-        String dataCompleta = mov.getDiaMes()[0] + " " + mov.getDiaMes()[1];
+        String dataCompleta = String.format("%02d%02d",mov.getDiaMes()[0]+1,mov.getDiaMes()[1]+1);
         data.setText(dataCompleta);
         valor.setText(mov.getValor() + "");
-        fixa.setChecked(true);
+        fixa.setChecked(false);
         check(fixa);
 
         View btn_rend = this.app.findViewById(R.id.btn_rend);
@@ -83,11 +79,12 @@ public class AddData implements AdapterView.OnItemSelectedListener {
         btn_rend.setOnClickListener(renda);
         btn_save.setOnClickListener(save);
 
-        if(mov.getValor() > 0) {
-            despesa(btn_rend); // Inicia movimentacao como uma renda
+        if(mov.getCategoria() == 0) {
+            renda(btn_rend); // Inicia movimentacao como uma renda
         }
         else {
             despesa(btn_desp); // Inicia movimentacao como uma despesa
+            sp.setSelection(mov.getCategoria());
         }
     }
 
