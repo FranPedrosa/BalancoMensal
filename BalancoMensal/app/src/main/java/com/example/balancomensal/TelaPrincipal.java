@@ -27,16 +27,19 @@ public class TelaPrincipal {
 
         Grafico g = app.findViewById(R.id.grafico);
         Pizza p = app.findViewById(R.id.pizza2);
-        g.setDados(db.getTotalMeses(12),db.getMesAtual());
-        p.setDados(db,12);
+
 
         Spinner tempo = app.findViewById(R.id.tempo);
-        String[] opcoes = {"Ultimo ano","Ultimo 6 meses","Ultimos 3 meses","Ultimo mês"};
+        String[] opcoes = {"Ultimos 3 meses","Ultimo 6 meses","Ultimo ano",};
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(app,android.R.layout.simple_spinner_item,opcoes);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         tempo.setOnItemSelectedListener(mudar);
         tempo.setAdapter(adapter);
+
+        g.setDados(db.getTotalMeses(6),db.getMesAtual());
+        p.setDados(db,6);
+        tempo.setSelection(1);
 
         View btn_add = app.findViewById(R.id.btn_add);
         btn_add.setOnClickListener(adicionar);
@@ -109,7 +112,7 @@ public class TelaPrincipal {
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
             Grafico g = app.findViewById(R.id.grafico);
             Pizza p = app.findViewById(R.id.pizza2);
-            int[] meses = {12,6,3,1};
+            int[] meses = {3,6,12};
             g.setDados(db.getTotalMeses(meses[position]),db.getMesAtual());
             p.setDados(db,meses[position]);
         }
@@ -118,7 +121,6 @@ public class TelaPrincipal {
         public void onNothingSelected(AdapterView<?> parent) {
         }
     };
-
 
     public void adicionar(View v) {
         Button btn_add = app.findViewById(R.id.btn_add);

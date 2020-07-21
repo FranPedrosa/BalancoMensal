@@ -67,12 +67,12 @@ public class Pizza extends View{
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             p.setColor(Color.WHITE);
             canvas.drawRect(0,0,w,h,p);
-            pizza(canvas,w*0.05f,h*0.05f,w*0.75f,h*0.75f,val,cores);
+            pizza(canvas,w*0.25f,h*0.05f,w*0.70f,h*0.70f,val,cores);
         }
 
-        float left = (float)(w*0.75);
-        float lefttext = (float)(w*0.81);
-        float right = (float)(w*0.79);
+        float left = (float)(w*0.05);
+        float lefttext = (float)(w*0.11);
+        float right = (float)(w*0.09);
         p.setTextSize(30);
         for(int i = 1; i < 7; i++){
             float top = (float)(h*(0.70+(i-1)*0.05));

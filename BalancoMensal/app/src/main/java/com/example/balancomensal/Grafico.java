@@ -59,20 +59,24 @@ public class Grafico extends View{
 
         for(int i = 0; i < meses.length; i++){
             int j = meses.length - i -1;
-            String valor = String.format("%.2f",meses[i]);
+            String valor = String.format("%.2f",Math.abs(meses[i]));
             System.out.println("Mes[" + mesAtual + "] = " + valor);
             System.out.println("Mes[" + i + "] = " + valor);
             if(meses[i] < 0){
-                p.setColor(Color.RED);
+                p.setColor(0xFFAD3523);
                 canvas.drawText(valor,larg*(j+0.1f),(float)(h/2 - meses[i]*zoom)+35,p);
+                canvas.drawRect(larg*(j+0.1f),h/2,larg*(j+0.8f),(float)(h/2 - meses[i]*zoom),p);
+                p.setColor(Color.BLACK);
+                canvas.drawText(nomes[mesAtual],larg*(j+0.1f),(float)(h/2)-5,p);
             }
             else{
-                p.setColor(Color.GREEN);
+                p.setColor(0xFF338F65);
                 canvas.drawText(valor,larg*(j+0.1f),(float)(h/2 - meses[i]*zoom)-5,p);
+                canvas.drawRect(larg*(j+0.1f),h/2,larg*(j+0.8f),(float)(h/2 - meses[i]*zoom),p);
+                p.setColor(Color.BLACK);
+                canvas.drawText(nomes[mesAtual],larg*(j+0.1f),(float)(h/2)+35,p);
             }
-            canvas.drawRect(larg*(j+0.1f),h/2,larg*(j+0.8f),(float)(h/2 - meses[i]*zoom),p);
-            p.setColor(Color.BLACK);
-            canvas.drawText(nomes[mesAtual],larg*(j+0.1f),(float)(h/2)+35,p);
+
             mesAtual--;
             if(mesAtual == -1){
                 mesAtual = 11;
