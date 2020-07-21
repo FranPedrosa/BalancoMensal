@@ -82,7 +82,7 @@ public class ListaMov extends View{
         while(m[i] != null){
             p.setColor(Color.BLACK);
             canvas.drawText(m[i].getNome(),60,y+40,p);
-            if(m[i].getValor() >= 0){
+            if(m[i].getCategoria() == 0){
                 p.setColor(Color.GREEN);
             }
             else{
@@ -99,12 +99,18 @@ public class ListaMov extends View{
         this.setLayoutParams(new LinearLayout.LayoutParams(RelativeLayout.LayoutParams.FILL_PARENT,y));
     }
 
-    public void Toque(int x, int y, AppCompatActivity app, Dados db) {
+    public void Toque(int x, int y, AppCompatActivity app, final Dados db) {
         int w = getWidth();
-        int i = (y-120)/50;
+        final int i = (y-120)/50;
         if(i >= 0){
             if(x > 5*w/6){
-                new Confirmacao(app,db,nMes,id[i]);
+                new Confirmacao(app,"Você tem certeza que quer apagar a movimentação?","Apagar","Cancelar") {
+                    @Override
+                    void confirm() {
+                        db.remover(nMes,id[i]);
+                        invalidate();
+                    }
+                };
             }
             else if(x > 2*w/3) {
                 new AddData(app, db, ms[i], id[i], nMes);
