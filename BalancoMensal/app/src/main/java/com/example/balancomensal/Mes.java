@@ -123,11 +123,24 @@ public class Mes implements Serializable {
 	}
 
 	public void atualizarMov(int j,Movimentacao nova){
+		Movimentacao m = listaMov[j];
+		if(m.getCategoria() != 0) {
+			valorCategoria[m.getCategoria()] -= m.getValor();
+			total += m.getValor();
+		}
+
+		if(m.getCategoria() == 0) {
+			valorCategoria[m.getCategoria()] -= m.getValor();
+			total -= m.getValor();
+		}
+		if(nova != null) {
+			addValorCategoria(nova);
+		}
 		listaMov[j] = nova;
 	}
 
 	public void removerMov(int j){
-		listaMov[j] = null;
+		atualizarMov(j,null);
 	}
 
 }

@@ -28,7 +28,7 @@ public class Dados implements Serializable {
         listaMes = new Mes[12];
         listaFixas = new Fixa[20];
         tamFixas = 0;
-        numFixas = 20;
+        numFixas = 0;
         for(int i = 0; i < 12;i++){
             listaMes[i] = new Mes();
         }
@@ -92,10 +92,11 @@ public class Dados implements Serializable {
         listaFixas[tamFixas] = f;
         fixaParaMovi(listaFixas[tamFixas]);
         tamFixas++;
+        numFixas++;
     }
 
     public void fixaParaMovi(Fixa f){
-        Movimentacao m = new Movimentacao(f.getNome(),f.getDiaMes()[0],f.getDiaMes()[1],ano,f.getValor(),f.getCategoria());
+        Movimentacao m = new Movimentacao(f.getNome(),f.getDiaMes()[0],mes_atual,ano,f.getValor(),f.getCategoria());
         add(m);
         f.setDuracao(f.getDuracao()-1);
         if(f.getDuracao() == 0){
@@ -105,7 +106,7 @@ public class Dados implements Serializable {
 
     public void removerFixa(String s){
         for(int i=0;i<tamFixas;i++){
-            if(s.equals(listaFixas[i].getNome())){
+            if(listaFixas[i] != null && s.equals(listaFixas[i].getNome())){
                 listaFixas[i] = null;
                 --numFixas;
                 return;
@@ -166,8 +167,10 @@ public class Dados implements Serializable {
     }
 
     private void todasFixas(){
+        System.out.println("Percorre : " + tamFixas);
         for(int i = 0;i < tamFixas;i++){
             if(listaFixas[i] != null){
+                System.out.println("Fixa para MOV : " + i);
                 fixaParaMovi(listaFixas[i]);
             }
         }
