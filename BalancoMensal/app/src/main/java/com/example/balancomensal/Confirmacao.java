@@ -9,30 +9,21 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
 
-public class Confirmacao{
+public abstract class Confirmacao{
 
-    Dados dados;
-    int mes;
-    int pos;
-
-
-    public Confirmacao(AppCompatActivity app, Dados db, int m, int p) {
-        dados = db;
-        mes = m;
-        pos = p;
-
+    public Confirmacao(AppCompatActivity app, String msg, final String confirm, String cancel) {
         AlertDialog.Builder builder = new AlertDialog.Builder(app);
-        builder.setMessage("Tem certeza que quer apagar a movimentação?")
+        builder.setMessage(msg)
                 .setPositiveButton("Apagar", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        System.out.println("VOCÊ DEVIA TER APAGADO!!!!");
-                        dados.remover(mes, pos);
-                        System.out.println("VOCÊ DEVIA TER APAGADO!!!!");
+                        confirm();
                     }
                 })
-                .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {public void onClick(DialogInterface dialog, int id) {
-                    System.out.println("VOCÊ DEVIA TER APAGADO!!!!");
+                .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
                 }});
         builder.show();
     }
+
+    abstract void confirm();
 }
