@@ -90,6 +90,7 @@ public class Dados implements Serializable {
             }
         }
         listaFixas[tamFixas] = f;
+        fixaParaMovi(listaFixas[tamFixas]);
         tamFixas++;
     }
 
