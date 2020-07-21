@@ -32,6 +32,12 @@
                 android:layout_margin="16dp"
                 android:addStatesFromChildren="false"
                 android:spinnerMode="dropdown" />
+
+            <Button
+                android:id="@+id/fixas"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Movimentações Mensais" />
         </LinearLayout>
     </ScrollView>
 
