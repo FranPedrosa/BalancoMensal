@@ -36,21 +36,8 @@ public class TelaFixas {
         public boolean onTouch(final View v, MotionEvent event) {
             int x = (int)event.getX();
             int y = (int)event.getY();
-            int w = v.getWidth();
-            final int i = y/50;
-            if( i >= 0){
-                if(x > 5*w/6){
-                    new Confirmacao(app,"Você tem certeza que quer apagar a movimentação fixa?","Apagar","Cancelar") {
-                        @Override
-                        void confirm() {
-                            db.removerFixa(i);
-                            v.invalidate();
-                        }
-                    };
-                } else if(x > 2*w/3) {
-                    new AddData(app, db, i);
-                }
-            }
+            ListaFixa lf = (ListaFixa) v;
+            lf.tocar(app,db,x,y);
             return false;
         }
     };

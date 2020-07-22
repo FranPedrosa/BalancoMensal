@@ -10,10 +10,12 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 public class ListaFixa extends View{
 
     private Fixa[] fixas;
-    private int tam = 0;
+    private int[] id = new int[20];
     private Paint p;
     private int dia = -1;
 
@@ -36,14 +38,33 @@ public class ListaFixa extends View{
     }
 
     @Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec){
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         int i = 0;
         for (int j = 0; j < 20;j++) {
-            if (fixas[i] != null) {
+            if (fixas[j] != null) {
+                id[i]=j;
                 i++;
             }
         }
         setMeasuredDimension(widthMeasureSpec,i*50 );
+    }
+
+    public void tocar(AppCompatActivity app, final Dados db, int x, int y) {
+        int w = getWidth();
+        final int i = y/50;
+        if( i >= 0){
+            if(x > 5*w/6){
+                new Confirmacao(app,"Você tem certeza que quer apagar a movimentação fixa?","Apagar","Cancelar") {
+                    @Override
+                    void confirm() {
+                        db.removerFixa(id[i]);
+                        invalidate();
+                    }
+                };
+            } else if(x > 2*w/3) {
+                new AddData(app, db, id[i]);
+            }
+        }
     }
 
     @Override
