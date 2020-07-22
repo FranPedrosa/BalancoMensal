@@ -53,11 +53,9 @@ public class Meses extends View {
         }
     }
 
-    private void aberto(Canvas canvas, int w, int h){
-        p.setColor(Color.BLACK);
-
+    private void aberto(Canvas canvas, int w, int h) {
         int y = 0;
-        p.setTextSize(70);
+        p.setTextSize(60);
         p.setTextAlign(Paint.Align.LEFT);
         ano = ano -1;
         for( int j = 0; j < 12; j++){
@@ -67,38 +65,40 @@ public class Meses extends View {
             }
             System.out.println(i + " " + j);
             if(i % 2 == 0){
-                p.setColor(Color.LTGRAY);
+                p.setColor(0xfff0f0f0);
             }
             else{
-                p.setColor(Color.GRAY);
+                p.setColor(0xfff8f8f8);
             }
             canvas.drawRect(0,j*80,600,j*80 + 80,p);
-            p.setColor(Color.BLACK);
+            p.setColor(0xff101010);
             canvas.drawText(meses[i] + " " + ano,60,j*80 + 70,p);
         }
     }
 
 
-    private void fechado(Canvas canvas, int w, int h){
+    private void fechado(Canvas canvas, int w, int h) {
+
+        System.out.printf("Ekhagdfkhasgdadgfhakasdkjdlkaajdfkasjdkasdasaldjalaskdlkajdlkas ===================== asjdjhashdjkashsdkaashhdkaahdkahs");
 
         p.setStyle(Paint.Style.FILL);
-        p.setColor(0xFFDDDDDD);
+        p.setColor(0xffd0d0d0);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            canvas.drawOval(100,100,250,250,p);
+            canvas.drawOval(w-170,h-297,w-56,h-184,p);
         }
         p.setStyle(Paint.Style.STROKE);
-        p.setStrokeWidth(5);
-        p.setColor(Color.BLACK);
+        p.setStrokeWidth(4);
+        p.setColor(0xffa0a0a0);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            canvas.drawOval(100,100,250,250,p);
+            canvas.drawOval(w-170,h-297,w-56,h-184,p);
         }
         p.setStyle(Paint.Style.FILL);
-
+        p.setColor(Color.BLACK);
         int y = 0;
-        p.setTextSize(40);
+        p.setTextSize(30);
         p.setTextAlign(Paint.Align.CENTER);
 
-        canvas.drawText("Meses",175,185,p);
+        canvas.drawText("Meses",w-113,h-230,p);
     }
 
     public int getMes(int y){
