@@ -13,7 +13,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="24dp"
-            android:text="Despesas Fixas:" />
+            android:text="Despesas Fixas:"
+            android:textSize="24sp" />
 
         <com.example.balancomensal.ListaFixa
             android:id="@+id/lista2"
@@ -27,7 +28,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="24dp"
-            android:text="Voltar" />
+            android:background="@drawable/my_button"
+            android:text="Voltar"
+            android:textColor="#F0F0F0" />
 
     </LinearLayout>
 

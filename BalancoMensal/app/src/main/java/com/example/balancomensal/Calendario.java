@@ -57,7 +57,7 @@ public class Calendario extends View{
         int larg = w/8;
         int alt = 800/7;
 
-        p.setColor(Color.BLUE);
+        p.setColor(0xff6000FF);
         canvas.drawRect(0,0,w,alt,p);
         p.setTextSize(50);
         p.setColor(Color.WHITE);

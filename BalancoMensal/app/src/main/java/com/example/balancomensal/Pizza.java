@@ -57,8 +57,7 @@ public class Pizza extends View{
 
     private Paint p;
     private double[] val;
-    private final int[] cores= { Color.RED,Color.RED,Color.YELLOW,Color.GREEN,Color.BLUE,Color.CYAN,Color.GRAY,Color.MAGENTA};
-
+    private final int[] cores= { Color.RED, Color.RED, 0xffE8E000, 0xff40A040, Color.BLUE, 0xff80D0F0, 0xffFFA0D0 };
     @Override
     protected void onDraw(Canvas canvas){
         int w = canvas.getWidth();

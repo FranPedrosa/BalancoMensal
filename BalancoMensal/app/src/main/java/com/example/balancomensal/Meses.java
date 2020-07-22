@@ -1,11 +1,13 @@
 package com.example.balancomensal;
 
 import android.content.Context;
+import android.content.res.Configuration;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Build;
 import android.util.AttributeSet;
+import android.util.DisplayMetrics;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -20,6 +22,10 @@ public class Meses extends View {
     private int ano;
     private Paint p;
     boolean aberto;
+    public int top;
+    public int right;
+    public int bottom;
+    public int left;
 
     private String[] meses = {"Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"};
 
@@ -79,24 +85,32 @@ public class Meses extends View {
 
     private void fechado(Canvas canvas, int w, int h) {
 
+        DisplayMetrics dm = getContext().getResources().getDisplayMetrics();
+        int px = Math.round(32 * (dm.xdpi / DisplayMetrics.DENSITY_DEFAULT));
+
+        left = w-3*px;
+        top = (int)(h-(5.5)*px);
+        right = w-px;
+        bottom = (int)(h-(3.5)*px);
+
         p.setStyle(Paint.Style.FILL);
-        p.setColor(0xffd0d0d0);
+        p.setColor(0xff4000DF);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            canvas.drawOval(w-170,h-297,w-56,h-184,p);
+            canvas.drawOval(left,top,right,bottom,p);
         }
         p.setStyle(Paint.Style.STROKE);
         p.setStrokeWidth(4);
-        p.setColor(0xffa0a0a0);
+        p.setColor(0xff3800D8);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            canvas.drawOval(w-170,h-297,w-56,h-184,p);
+            canvas.drawOval(left,top,right,bottom,p);
         }
         p.setStyle(Paint.Style.FILL);
-        p.setColor(Color.BLACK);
+        p.setColor(0xfff0f0f0);
         int y = 0;
         p.setTextSize(30);
         p.setTextAlign(Paint.Align.CENTER);
 
-        canvas.drawText("Meses",w-113,h-230,p);
+        canvas.drawText("Meses",(right+left)/2,(top+bottom)/2+15,p);
     }
 
     public int getMes(int y){

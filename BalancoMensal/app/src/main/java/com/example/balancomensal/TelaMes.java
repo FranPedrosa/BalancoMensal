@@ -63,9 +63,8 @@ public class TelaMes {
             Meses menu = (Meses) v;
             int x = (int)event.getX();
             int y = (int)event.getY();
-            int w = v.getWidth();
-            int h = v.getHeight();
-            if(x > w-170 && x < w-56 && h > h-297 && y < h-184){
+
+            if(x > menu.left && x < menu.right && y > menu.top && y < menu.bottom) {
                 menu.aberto = true;
                 menu.setOnTouchListener(aberto);
                 menu.invalidate();

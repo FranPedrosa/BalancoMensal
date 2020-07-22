@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">BalancoMensal</string>
+    <string name="app_name">Balanço Mensal</string>
     <string-array name="category">
         <item id="0">Escolha uma categoria</item>
         <item id="1">Alimentação</item>

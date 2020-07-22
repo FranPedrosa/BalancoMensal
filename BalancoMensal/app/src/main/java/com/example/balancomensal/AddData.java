@@ -35,15 +35,18 @@ public class AddData implements AdapterView.OnItemSelectedListener {
         spCategoria.setAdapter(adapter);
 
         // Inicia os botoes e a check box
+        // Inicia os botoes e a check box
         View btn_rend = app.findViewById(R.id.btn_rend);
         View btn_desp = app.findViewById(R.id.btn_desp);
         View btn_save = app.findViewById(R.id.btn_save);
         View fixa = app.findViewById(R.id.fixa);
+        View btn_cancel = this.app.findViewById(R.id.btn_cancel);
 
         btn_desp.setOnClickListener(despesa);
         btn_rend.setOnClickListener(renda);
         btn_save.setOnClickListener(save);
         fixa.setOnClickListener(check);
+        btn_cancel.setOnClickListener(cancelar);
 
         despesa(btn_desp); // Inicia movimentacao como uma despesa
         check(fixa); // Inicia movimentacao como nao fixa
@@ -64,6 +67,8 @@ public class AddData implements AdapterView.OnItemSelectedListener {
         CheckBox fixa = this.app.findViewById(R.id.fixa);
         Spinner sp = this.app.findViewById(R.id.categoria);
 
+        fixa.setVisibility(View.GONE);
+
         nome.setText(mov.getNome());
         String dataCompleta = String.format("%02d%02d",mov.getDiaMes()[0]+1,mov.getDiaMes()[1]+1);
         data.setText(dataCompleta);
@@ -74,10 +79,13 @@ public class AddData implements AdapterView.OnItemSelectedListener {
         View btn_rend = this.app.findViewById(R.id.btn_rend);
         View btn_desp = this.app.findViewById(R.id.btn_desp);
         View btn_save = this.app.findViewById(R.id.btn_save);
+        View btn_cancel = this.app.findViewById(R.id.btn_cancel);
 
         btn_desp.setOnClickListener(despesa);
         btn_rend.setOnClickListener(renda);
         btn_save.setOnClickListener(save);
+        btn_cancel.setOnClickListener(cancelar);
+
 
         if(mov.getCategoria() == 0) {
             renda(btn_rend); // Inicia movimentacao como uma renda
@@ -105,6 +113,8 @@ public class AddData implements AdapterView.OnItemSelectedListener {
         Spinner sp = this.app.findViewById(R.id.categoria);
         EditText dur = this.app.findViewById(R.id.duracao);
 
+        fixa.setVisibility(View.GONE);
+
         nome.setText(f.getNome());
         String dataCompleta = String.format("%02d",f.getDiaMes()[0]+1);
         data.setText(dataCompleta);
@@ -116,10 +126,12 @@ public class AddData implements AdapterView.OnItemSelectedListener {
         View btn_rend = this.app.findViewById(R.id.btn_rend);
         View btn_desp = this.app.findViewById(R.id.btn_desp);
         View btn_save = this.app.findViewById(R.id.btn_save);
+        View btn_cancel = this.app.findViewById(R.id.btn_cancel);
 
         btn_desp.setOnClickListener(despesa);
         btn_rend.setOnClickListener(renda);
         btn_save.setOnClickListener(save);
+        btn_cancel.setOnClickListener(cancelar);
 
         if(f.getCategoria() == 0) {
             renda(btn_rend); // Inicia movimentacao como uma renda
@@ -156,6 +168,13 @@ public class AddData implements AdapterView.OnItemSelectedListener {
         @Override
         public void onClick(View v) {
             save(v);
+        }
+    };
+
+    View.OnClickListener cancelar = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            cancelar(v);
         }
     };
 
@@ -215,13 +234,17 @@ public class AddData implements AdapterView.OnItemSelectedListener {
     public void fixa(View v) {
         fixa = true;
         EditText edit_txt = app.findViewById(R.id.duracao); // Inicia EditText de duracao
+        EditText dt = app.findViewById(R.id.data);
         edit_txt.setVisibility(View.VISIBLE); // Deixa duracao visivel
+        dt.setHint("DD");
     }
 
     public void naoFixa(View v) {
         fixa = false;
         EditText edit_txt = app.findViewById(R.id.duracao); // Inicia EditText de duracao
+        EditText dt = app.findViewById(R.id.data);
         edit_txt.setVisibility(View.GONE); // Deixa duracao invisivel
+        dt.setHint("DDMM");
     }
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -282,8 +305,7 @@ public class AddData implements AdapterView.OnItemSelectedListener {
             int cat = categoria.getSelectedItemPosition(); // Eu mudei essa linha de getSelectedItem para getSel..ItemPosition.
 
             Context context = app.getApplicationContext();
-            int duration = Toast.LENGTH_LONG;
-            Toast.makeText(context, nom+" "+dat+" "+val+" "+dur+" "+cat, duration).show();
+
             if(todosPreenchidos(nom, dat, dur, categoria, val, fixa)) {
 
                 int DDMM = Integer.parseInt(dat);
@@ -306,9 +328,15 @@ public class AddData implements AdapterView.OnItemSelectedListener {
                 }
                 new TelaPrincipal(app,db);
             }
-            else
+            else {
+                int duration = Toast.LENGTH_LONG;
                 Toast.makeText(context, "Algum elemento não foi preenchido ou o mês está em formato inválido.", duration).show();
+            }
         }
+    }
+
+    public void cancelar(View v) {
+        new TelaPrincipal(app, db);
     }
 
     private boolean todosPreenchidos(String nome, String data, String duracao, Spinner categoria, String valor, CheckBox fixa) {
@@ -329,4 +357,5 @@ public class AddData implements AdapterView.OnItemSelectedListener {
             return false;
         else return true;
     }
+
 }

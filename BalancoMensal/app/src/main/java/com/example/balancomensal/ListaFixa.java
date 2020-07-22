@@ -49,6 +49,8 @@ public class ListaFixa extends View{
     @Override
     protected void onDraw(Canvas canvas){
 
+        System.out.println("\n\n\n\n\n" + fixas.length + "\n\n\n\n\n");
+
         int w = canvas.getWidth();
         int h = canvas.getHeight();
 
@@ -64,6 +66,7 @@ public class ListaFixa extends View{
             if(fixas[i] == null){
                 continue;
             }
+            System.out.println("\n" + i + "\n");
             p.setColor(Color.BLACK);
             canvas.drawText(fixas[i].getNome(),60,y+40,p);
             if(fixas[i].getCategoria() == 0){
@@ -81,6 +84,4 @@ public class ListaFixa extends View{
         }
         this.setLayoutParams(new LinearLayout.LayoutParams(RelativeLayout.LayoutParams.FILL_PARENT,y));
     }
-
-
 }
