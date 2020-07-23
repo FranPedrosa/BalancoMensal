@@ -2,13 +2,14 @@ package com.example.balancomensal;
 
 import java.io.Serializable;
 
+//Uma movientação simples.
 public class Movimentacao implements Serializable {
 	private String Nome;	
-	private int[] diaMes = new int[3];
+	private int[] diaMes = new int[3]; //Vetor [dia,mes,ano]
 	private int valor;
 	private int categoria;
 
-	//oi teste de commit me da meu credito Fran "the não da credito" Pedrosa
+	//Contrutor com todas as proprieadadas
 	Movimentacao(String n, int d, int m, int a, int v, int cat) {
 		Nome = n;
 		diaMes[0] = d;
@@ -17,35 +18,17 @@ public class Movimentacao implements Serializable {
 		valor = v;
 		categoria = cat;
 	}
-	
-	void setNome(String s) {
-		Nome = s;
-	}
-	
-	void setDiaMes(int[] d) {
-		diaMes = d;
-	}
-	
-	void setValor(int v) {
-		valor = v;
-	}
 
-	void setCategoria(int c) {
-		categoria = c;
-	}
-	
+	//Getters
 	public String getNome() {
 		return Nome;
 	}
-	
 	public int[] getDiaMes() {
 		return diaMes;
 	}
-		
 	public int getValor() {
 		return valor;
 	}
-	
 	public int getCategoria() {
 		return categoria;
 	}

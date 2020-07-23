@@ -2,25 +2,18 @@ package com.example.balancomensal;
 
 import java.io.Serializable;
 
+//Representa o mês, tem uma lista de movimentações.
 public class Mes implements Serializable {
 
-	/*
-	public static final int GANHOS = 0;
-	public static final int ALIMENTACAO = 1;
-	public static final int MORADIA = 2;
-	public static final int LAZER = 3;
-	public static final int TRANPORTE = 4;
-	public static final int COMPRAS = 5;
-	public static final int OUTROS = 6;
-	 */
-
+	//O nome de cada categoria
 	public static final String[] NOME_CATEGORIAS = {"Ganhos","Alimentação","Moradia","Lazer","Transporte","Compras","Outros"};
 
-	private Movimentacao[] listaMov;
-	private double[] valorCategoria;
-	private int numMov;
-	private double total;
-	
+	private Movimentacao[] listaMov; //A lista de movimentações propriamente dita.
+	private double[] valorCategoria; //O valor total de cada categoria.
+	private int numMov; //O número de movimentaçẽos.
+	private double total; //O valor total do balanço.
+
+	//Construtor, inicia os vetores e variáveis.
 	Mes(){
 		numMov = 0;
 		listaMov = new Movimentacao[50];
@@ -30,36 +23,38 @@ public class Mes implements Serializable {
 		}
 		total = 0.0;
 	}
-	
+
+	//Getters
 	public double getTotal() {
 		return total;
 	}
-	
+	public double getValorCategoria(int cat) {
+		return valorCategoria[cat];
+	}
+	public void removerMov(int j){
+		atualizarMov(j,null);
+	}
+
+	//Adiciona uma nova movimentação.
 	public void addMovimentacao(Movimentacao m) {
 		listaMov[numMov] = m;
 		numMov++;
 		addValorCategoria(m);
-		
 	}
-	
-	public void addValorCategoria(Movimentacao m) {
 
+	//Incrementa ( ou decrementa) o valor de cada categoria.
+	public void addValorCategoria(Movimentacao m) {
 			if(m.getCategoria() != 0) {
 				valorCategoria[m.getCategoria()] += m.getValor();
 				total -= m.getValor();
 			}
-			
 			if(m.getCategoria() == 0) {
 				valorCategoria[m.getCategoria()] += m.getValor();
 				total += m.getValor();
 			}
+	}
 
-	}
-	
-	public double getValorCategoria(int cat) {
-		return valorCategoria[cat];
-	}
-	
+	//Soma todos gastos para encontrar o total.
 	public double getTotalGastos() {
 		double t=0.0;
 		for(int i=1;i<7;i++) {
@@ -68,6 +63,7 @@ public class Mes implements Serializable {
 		return t;
 	}
 
+	//Retorna todas as movimentações de uma data.
 	public Movimentacao[] findMovData(int dia) {
 		Movimentacao[] lm = new Movimentacao[30];
 		int j=0;
@@ -86,6 +82,7 @@ public class Mes implements Serializable {
 		return aux;
 	}
 
+	//Retorna as posições das movimentações que vieram de findMovData()
 	public int[] findIdData(int dia){
 		int [] nov = new int[30];
 		int j=0;
@@ -104,6 +101,7 @@ public class Mes implements Serializable {
 		return aux;
 	}
 
+	//Retorna um vetor falando quais dias do mês tem movimentação quais não, para mostrar no calendário.
 	public boolean[] marcadorMes(){
 		boolean[] marcador = new boolean[31];
 		for(int i=0;i<numMov;i++){
@@ -114,14 +112,7 @@ public class Mes implements Serializable {
 		return marcador;
 	}
 
-	public Movimentacao[] proxConta(int dia){
-		boolean[] marc = marcadorMes();
-		while(marc[dia]!= true){
-			dia++;
-		}
-		return findMovData(dia);
-	}
-
+	//Atualiza a movimentação na posição j
 	public void atualizarMov(int j,Movimentacao nova){
 		Movimentacao m = listaMov[j];
 		if(m.getCategoria() != 0) {
@@ -138,9 +129,4 @@ public class Mes implements Serializable {
 		}
 		listaMov[j] = nova;
 	}
-
-	public void removerMov(int j){
-		atualizarMov(j,null);
-	}
-
 }

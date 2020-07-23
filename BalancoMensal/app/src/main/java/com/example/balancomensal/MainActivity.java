@@ -17,30 +17,23 @@ public class MainActivity extends AppCompatActivity {
 
     Dados db;
 
+    //Chama quando o aplicativo é aberto.
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
 
+        //Tenta abrir os dados salvos.
         db = Dados.abrir(this);
 
+        //Se não encontrar cria dados vazios novos.
         if(db == null){
             LocalDate ld = LocalDate.now();
             db = new Dados(ld.getMonthValue()-1,ld.getYear());
-            System.out.println("Dados não encontrados criando novos.");
-            //Deveria avisar o cliente que não achou o histórico de transações?
         }
 
+        //Abre a tela principal.
         new TelaPrincipal(this,db);
-
-        /* ==================================================================
-        Agora temos uma mini main, tudo que tava aqui foi para Tela Principal.
-        para mudar de tela basta chamar.
-            new TelaPrincipal(app,db);
-                    ou
-            new AddData(app,db);
-         ====================================================================*/
     }
 }
 
